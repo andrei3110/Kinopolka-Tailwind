@@ -1,0 +1,24 @@
+<%- include('../particles/header.ejs') %>
+
+
+<div class="content">
+    <%- include('../particles/tags.ejs') %>
+
+    
+        <div class="hollow"></div>        
+            <% for (let i=0; i < attribute_values.length; i++) { %>
+
+                <a href="/from/general/<%= attribute_values[i].name %>" >
+                    <div class="genre__object" id="genres__object">
+
+                        <h2 class="genres__name">
+                            <%= attribute_values[i].name %>
+                        </h2>
+                    </div>
+                </a>
+            <% } %>
+            <div class="hollow"></div>     
+
+</div>
+<%- include('../particles/footer.ejs') %>
+

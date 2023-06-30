@@ -1,0 +1,15 @@
+<%- include('../particles/header.ejs') %>
+
+
+<div class="content">
+    <a href="/addGenres">жанры</a>
+    <a href="/addCategories">Категории</a>
+    <form action="/addGenres" method="post">
+        <input name="genre" type="text" placeholder="для фильмов">
+        <input name="cartoonGenre" type="text" placeholder="для мультфильмов">
+        <input type="submit" value="опубликовать">
+    </form>
+
+</div>
+
+<%- include('../particles/footer.ejs') %>

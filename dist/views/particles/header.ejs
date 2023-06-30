@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Kino-polka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/icon.jpg" type="image/x-icon">
+
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.6/flowbite.min.css" rel="stylesheet" />
+    <div class="bg-[#2d2d2d] h-[90px] z-40 fixed w-full shadow-lg shadow-gray-900/50">
+        <div class="w-full">
+            <!-- <div class="text-center"> -->
+                <h1 class="text-[#cacaca] m-5 text-4xl fixed left-14 inline-block">Kino-polka</h1>
+                <form action="/home" method="post"  class="float-center absolute left-[500px] mt-5 inline-block">
+                    
+                    <input name="name" class=" w-96 text-center h-10 inline-block" placeholder="введите название фильма">
+                </form>
+            <!-- </div> -->
+            <!-- <input type="checkbox" id="side-checkbox" /> -->
+
+<div id="menu" class="fixed bg-[#2d3141] w-80 h-screen text-white p-10-5 top-0 text-center z-10 hidden">
+    <button class="float-right mx-2 z-10 relative text-3xl rotate-45 " id="close">+</button>
+    <div class="text-xl z-2 pb-2 mb-4 border-b-2 text-center">Меню</div>
+    
+    <p>
+
+        <a href="/home" class="transition w-60 p-4 bg-[#2d3141] inline-block text-center text-lg hover:bg-[#34394c] duration-700"><%- include('../icons/home__icon.ejs') %> Главная</a>
+
+        <% for (let i = 0; i < categories.length; i++) { %>
+        <a href="/categories/<%=  categories[i].id %>" class="transition w-60 p-4 bg-[#2d3141] inline-block text-center text-lg hover:bg-[#34394c] duration-700">
+            <%= categories[i].name %>
+        </a>
+        <% } %>
+    </p>
+</div>
+
+
+<div class="text-center">
+    <label class="inline-block" for="side-checkbox">
+        <button id="exit" class="left-5 z-5 absolute top-5 "><%- include('../icons/menu__icons.ejs') %></button>
+    </label>
+</div>
+         
+<script>
+    const open = document.getElementById('exit')
+    open.addEventListener('click', function myFunction() {
+    document.getElementById("menu").classList.toggle('hidden')
+    })
+    const close = document.getElementById('close')
+    close.addEventListener('click', function myFunction() {
+    document.getElementById("menu").classList.toggle('hidden')
+    })
+</script>   
+                
+            <% if (auth ) { %>
+                <button id="dropBtn" class="text-gray right-2 m-6 top-0 inline-block  fixed" ><%- include('../icons/user-circle__icons.ejs') %></button>
+            <div class="fixed inline-block top-24 right-40 float-right">
+               
+
+                <div id="myDropdown" class="absolute bg-[#323232] -top-2 w-40 hidden">
+                    <% if (auth) { %>
+                        <a href="/cart"><button class="block text-white w-full text-center p-2 hover:bg-[#393939] duration-700">корзина</button></a>
+                        <a href="/profile"><button class="block text-white w-full text-center p-2 hover:bg-[#393939] duration-700">профиль</button></a>
+                    <% if (admin) { %>
+                    <a href="/items/create"><button class="block text-white w-full text-center p-2 hover:bg-[#393939] duration-700">добавить</button></a>
+                    <a href="/users"><button class="block text-white w-full text-center p-2 hover:bg-[#393939] duration-700">пользователи</button></a>
+                    <% } %>
+                    <a href="/logout"><button class="block text-white w-full text-center p-2 hover:bg-[#393939] duration-700">выход</button></a>
+                    <% } else { %>
+                    <a href="/enter"><button class="block text-white w-full text-center p-2 hover:bg-[#393939] duration-700">вход</button></a>
+                    <% } %>   
+                </div>
+            </div>
+
+            <% } else { %>
+            <a href="/enter" class="text-gray right-1 m-5 top-0 inline-block  fixed"><%- include('../icons/enter__icon.ejs') %></a>
+            <% } %>
+
+            
+
+            <script>
+                const dropBtn = document.getElementById('dropBtn')
+                dropBtn.addEventListener('click', function myFunction() {
+                 document.getElementById("myDropdown").classList.toggle('hidden')
+                
+                })
+            </script>
+
+        </div>
+    </div>
+    <script src="/node_modules/flowbite/flowbite.min.js"></script>
+    <script src="/js/sliderController.js" defer></script>
+</head>
+
+<body class=" m-0">

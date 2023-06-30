@@ -1,0 +1,29 @@
+<%- include('../particles/header.ejs') %>
+<div class="content__auth">
+
+    <form action="/login" method="post">
+
+        <div class="vhod">
+            <div class="auth__decoration">
+                <div class="auth__icon"><%- include('../icons/auth__user__icon.ejs') %></div>
+                <div class="circle"></div>
+            </div>
+            <div class="vhod__block-inputs">
+                <span class="input__addon__name">
+                    <%- include('../icons/user__login__icon.ejs') %>
+                </span>
+                <input class="input__vhod" name="name" placeholder="Введите имя" required>
+                <span class="input__addon__key"><%- include('../icons/key__icon.ejs') %>
+                </span>
+                <input class="input__vhod" id="Textinput" type="password" name="password" placeholder="Введите пароль" required>
+            </div>
+
+            <input type="submit" class="vhod__btn" value="Войти">
+            <a href="/register" class="registration">Зарегистрироваться</a>
+        </div>
+
+    </form>
+
+
+</div>
+<%- include('../particles/footer.ejs') %>

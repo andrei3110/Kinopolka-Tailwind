@@ -1,0 +1,94 @@
+<%- include('particles/header.ejs') %>
+
+    <div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
+
+        <div class="width-full  relative top-[100px] bg-[#7f7e7e] border-2 border-gray-700">
+            <div class="relative overflow-auto text-center width-auto ">
+                <% for (let i=0; i < genres.length; i++) { %>
+                    <form class="inline-block py-[10px] text-center" action="/search/byGenre/<%= genres[i].id %>"
+                        method="post">
+                        <input type="submit" class="inline-block h-10 text-white text-[15px] mx-[2px] bg-gray"
+                            name="name" value="<%= genres[i].name %>">
+                    </form>
+                    <% } %>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-6  grid-rows-1 mt-24 h-full text-white ">
+
+            <div class="col-span-1 bg-white  border-r-2 ml-1 border-gray-500">
+                <div class="relative w-full h-full ">
+
+                    <div class="sticky top-[80px] mt-10  font-medium text-xl p-3 text-gray-700  w-full ">
+                        <a href="/home"><button
+                                class=" transition bg-white w-full p-3 hover:bg-stone-200 duration-700">Главная</button></a>
+                        <% for (let i=0; i < categories.length; i++) { %>
+                            <a href="/categories/<%=  categories[i].id %>"><button
+                                    class=" transition bg-white w-full p-3 hover:bg-stone-200 duration-700">
+                                    <%= categories[i].name %>
+                                </button></a>
+                        <% } %>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <div class="col-span-5  bg-[#e7e7e7]">
+               
+             
+         
+    <%- include('particles/slider.ejs') %>
+
+
+                   
+                    <div class="relative mt-5 w-full h-[820px] mb-10  bg-white  shadow-2xl shadow-gray-900/50 text-center">
+
+                        <div class="w-full h-[500px] overflow-hidden">
+                            <img src="/img/collage.jpg" class=" w-full h-auto p-4 brightness-50 ">
+                            <div class="relative bottom-[600px] z-20 text-center">
+                                <font size="60px" color="white">Подписка</font>
+                                <font size="50px" color="red">Kino+</font>
+                                <p>
+                                    <font size="5px" color="white">доступ к платным фильмам вместе с подпиской</font>
+                                </p>
+                                <p>
+                                    <font size="5px" color="#778cde">
+                                        <h4>0 дней бесплатно</h4>
+                                    </font>
+                                </p>
+                            </div>
+                            <div class="text-center">
+                                <a class=" relative px-8 py-4 bottom-[500px] bg-red-700 text-white font-light text-lg rounded-lg shadow-2xl shadow-red-700/70 hover:bg-red-600 duration-700"
+                                    href="/subscribe">Попробовать Kino+</a>
+                            </div>
+
+                        </div>
+                        
+                        <div class="w-full  h-[300px] bg-slate-200">
+                            <div class="h-[260px] w-full mt-5 inline-block overflow-hidden">
+                                <% for (let i=0; i < items.length; i++) { %>
+                                    <a href="/des__film/<%= items[i].id %>" " class="text-white">
+
+                                        <div class="mx-auto w-[170px] h-[280px] p-1 text-center inline-block bg-slate-800">
+                                            <div class="absolute bg-red-600 px-3">пописка</div>
+                                            <img class="w-[170px] h-[220px]" src="/img/<%= items[i].image %>">
+
+                                            <div class="text-white">
+                                                <%= items[i].name %>
+                                            </div>
+                                        </div>
+
+                                    </a>
+                                    <% } %>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+    
+
+
+    <%- include('particles/footer.ejs') %>

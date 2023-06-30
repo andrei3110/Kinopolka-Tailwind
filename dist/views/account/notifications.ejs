@@ -1,0 +1,34 @@
+<%- include('../particles/header.ejs') %>
+
+
+            <div class="content">
+                <div class="notification__header">
+                    
+                    <button class="notification__button--Notification">Уведомления</button>
+                    <button class="support__button--Notification">техподдержка</button>
+                    
+                    <hr>
+                </div>
+                <% if(admin) { %>
+                    <form action="/sendMess" method="post">
+                        <input name="text"  class="inputmessage">
+                        <input class="sendMessage" type="submit"> 
+                    </form>
+                <% } %>
+                    <% for (let i=0; i < chat.length; i++) { %>
+                <div class="chat__wrapper">
+                    <div class="chat">
+                        <div class="name__noitfication">
+                            Admin
+                        </div>
+                        <hr>
+                        <div class="text__notification">
+                            <%= chat[i].text %>
+                        </div>
+                    </div>
+                </div>
+                    <% } %>
+                
+            </div>
+
+    <%- include('../particles/footer.ejs') %>

@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model items {
+  id           Int        @id @default(autoincrement())
+  name         String?    @db.VarChar(255)
+  image        String?    @db.VarChar(255)
+  genre        String?    @db.VarChar(255)
+  country      String?    @db.VarChar(255)
+  type         Int?       @db.Int       
+  year         String?    @db.VarChar(255)
+  description  String?    @db.Text
+  age          Float?     @db.Float
+  producer     String?    @db.VarChar(255)
+  operator     String?    @db.VarChar(255)
+  screenwriter String?    @db.VarChar(255)
+  regicer      String?    @db.VarChar(255)
+  actor        String?    @db.VarChar(255)
+  status       String?    @db.VarChar(255)  
+  video        String?    @db.Text
+  treller      String?    @db.Text
+
+  Genres        items__genres[]
+  Users        basket[]
+}
+model genres {
+  id       Int     @id @default(autoincrement())
+  name     String
+  Items   items__genres[]
+}
+
+model items__genres {
+  relItem       items    @relation(fields:[itemId], references: [id])
+  itemId        Int
+  relGenre      genres @relation(fields:[genreId], references: [id])
+  genreId       Int
+
+  @@id([itemId, genreId])
+}
+
+model users {
+  id       Int     @id @default(autoincrement())
+  name     String? @db.VarChar(255)
+  password String? @db.VarChar(255)
+  status   String? @db.VarChar(255)
+  avatar   String? @db.VarChar(255)
+  type     String  @db.VarChar(5)
+
+  Items   basket[]
+}
+model basket {
+  relItem       items    @relation(fields:[itemId], references: [id])
+  itemId        Int
+  relUsers      users @relation(fields:[usersId], references: [id])
+  usersId       Int
+
+  @@id([itemId, usersId])
+}
+
+model comments {
+  id         Int     @id @default(autoincrement())
+  rate     Int?    @db.Int
+  user__name String? @db.VarChar(255)
+  move__id   Int?    @db.Int
+  text       String? @db.VarChar(255)
+}
+
+
+model categories {
+  id      Int     @id @default(autoincrement())
+  name    String? @db.VarChar(255)
+}
+
+model attribute {
+  id       Int     @id @default(autoincrement())
+  name     String  @db.VarChar(255)
+  tag      String  @db.VarChar(255)
+
+  attribute_values   attribute_attribute_values[]
+}
+model attribute_values {
+  id       Int     @id @default(autoincrement())
+  name      String? @db.VarChar(255)
+
+  attribute   attribute_attribute_values[]
+}
+model attribute_attribute_values {
+  relAttribute         attribute        @relation(fields:[attributeId], references: [id])
+  attributeId             Int
+  relAttribute_value   attribute_values @relation(fields:[attribute_valueId], references: [id])
+  attribute_valueId       Int
+
+  @@id([attributeId, attribute_valueId])
+}
+
+model cartoonGenres {
+  id       Int     @id @default(autoincrement())
+  name     String? @db.VarChar(255)
+  image    String? @db.VarChar(255)
+}

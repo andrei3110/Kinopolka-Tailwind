@@ -1,0 +1,64 @@
+<%- include('particles/header.ejs') %>
+
+<div class="content">
+
+    <div class="genres__tags">
+        <div class="genres__tags__wrapper">
+            <% for (let i=0; i < genres.length; i++) { %>
+                <form class="tags__form" action="/search/byGenre/<%= genres[i].id %>" method="post">
+                    <input type="submit" class="tags__item" name="name" value="<%= genres[i].name %>">
+                </form>
+            <% } %>
+        </div>
+    </div>
+
+    <% if (searchMove) { %>
+        <span class="scroll-icon"><i class="fa fa-angle-up fa-4x" aria-hidden="true"></i></span>
+       
+        
+        <% for (let i=0; i < items.length; i++) { %>
+    
+            <a href="/des__film/<%= items[i].id %>" class="descrip">
+                <div class="film__object" id="film__object">
+    
+                    <h2 class="film__name">
+                        <%= items[i].name %>
+                    </h2>
+                    <div class="film__country">
+                        <%= items[i].country %>
+                    </div>
+                    <div class="film__genre">
+                        <%= items[i].genre %>
+                    </div>
+                    <img class="film__image" src="/img/<%= items[i].image %>">
+                    <div>
+    
+                            <% if (auth) { %>
+                                <form action="/save__Video" method="post">
+    
+                                    <input type="hidden" value="<%= items[i].name %>" name="name">
+                                    <input type="hidden" value=" <%= items[i].country %>"name="country">
+                                    <input type="hidden" value="<%= items[i].star %>" name="star">
+                                    <input type="hidden" value="<%= items[i].genre %>" name="genre">
+                                    <input type="hidden" value="<%= items[i].image %>" name="image">
+                                    <!-- <input type="hidden" value="<%= items[i].age %>" name="age"> -->
+                                    <button class="save__InBasket"  type="submit"><%- include('icons/bookmark__icon.ejs') %><span class="save__InBasket--text">В избранное</span></button>
+    
+                                </form>
+                                <% if (admin) { %>
+                                    <form action="/delete__moves/<%= items[i].id %>" method="post">
+                                        <button class="delete__moves"><%- include('icons/delete__icon.ejs') %></button>
+                                    </form>
+                                <% } %>
+                            <% } %>
+                    </div>
+                </div>
+            </a>
+        <% } %>
+    <% } else { %>
+        <!-- <span class="search-icon"><i class="fa fa-search fa-4x" aria-hidden="true"></i></span> -->
+        <div class="not__found">по вашему запросу ничего не найдено</div>
+    <% } %>
+        
+    </div>
+    <%- include('particles/footer.ejs') %>

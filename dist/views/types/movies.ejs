@@ -1,0 +1,78 @@
+<%- include('../particles/header.ejs') %>
+
+    <div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
+        <%- include('../particles/tags.ejs') %>
+
+
+            <div class="relative  mt-24 ">
+
+                <% for (let i=0; i < items.length; i++) { %>
+
+                    <a href="/des__film/<%= items[i].id %>" class="descrip">
+                        <div class="w-[80%] h-40 p-1 bg-slate-200 relative t-5 brder-b-1 mx-auto border-gray-600"
+                            id="film__object">
+
+                            <h2 class="absolute left-36   pl-13 text-2xl text-black">
+                                <%= items[i].name %>
+                            </h2>
+                            <div class="absolute left-52 top-24 text-lg text-black">
+                                <%= items[i].country %>
+                            </div>
+                            <div class="absolute left-52 top-16 text-xl text-black">
+                                <%= items[i].genre %>
+                            </div>
+                            <% if (items[i].status=="бесплатно" ) { %>
+                                <div class="film__status free">
+                                    <%= items[i].status %>
+                                </div>
+                                <% } else { %>
+                                    <div class="film__status sub">
+                                        <%= items[i].status %>
+                                    </div>
+
+                                    <% } %>
+
+                                        <img class="w-28 h-36 absolute top-2 left-2" src="/img/<%= items[i].image %>">
+                                        <div>
+
+
+                                            <% if (auth) { %>
+                                                <form action="/save__Video/<%= items[i].id %>" method="post">
+
+                                                    <input type="hidden" value="<%= items[i].name %>" name="name">
+                                                    <input type="hidden" value=" <%= items[i].country %>"
+                                                        name="country">
+                                                    <input type="hidden" value="<%= items[i].star %>" name="star">
+                                                    <input type="hidden" value="<%= items[i].genre %>" name="genre">
+                                                    <input type="hidden" value="<%= items[i].image %>" name="image">
+                                                    <button class="save__InBasket" type="submit"><%-
+                                                            include('../icons/bookmark__icon.ejs') %><span
+                                                                class="save__InBasket--text">В избранное</span></button>
+
+                                                </form>
+                                                <% if (admin) { %>
+                                                    <form action="/delete__movies/<%= items[i].id %>" method="post">
+                                                        <button class="delete__moves"><%-
+                                                                include('../icons/delete__icon.ejs') %></button>
+                                                    </form>
+
+                                                    <% } %>
+                                                        <% } %>
+                                        </div>
+                        </div>
+                    </a>
+                    <% } %>
+
+
+            </div>
+            <% for (let i=1; i <=count; i++) { %>
+                <a class="page" href="?page=<%= i %>">
+                    <div>
+                        <%= i %>
+                    </div>
+                </a>
+                <% } %>
+                    <div class="hollow"></div>
+    </div>
+
+    <%- include('../particles/footer.ejs') %>

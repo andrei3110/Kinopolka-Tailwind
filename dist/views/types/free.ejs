@@ -1,0 +1,41 @@
+<%- include('../particles/header.ejs') %>   
+    <div class="content">
+        
+        <%- include('../particles/tags.ejs') %>
+
+        <% if (category == 1 || category == 2) { %>    
+            <% for (let i=0; i < items.length; i++) { %>
+
+                <a href="/from/movies/<%= items[i].name %>" >
+                    <div class="genre__object" id="genres__object">
+
+                        <h2 class="genres__name">
+                            <%= genres[i].name %>
+                        </h2>
+        
+                        
+                        <img class="genres__image" src="/icon/<%= genres[i].image %>">
+                    </div>
+                </a>
+                
+            <% } %>
+            <% } else if (category == 3) { %>
+                <% for (let i=0; i < cartoonGenres.length; i++) { %>
+
+                    <a href="/from/cartoons/<%= cartoonGenres[i].name %>" >
+                        <div class="genre__object" id="genres__object">
+    
+                            <h2 class="genres__name">
+                                <%= cartoonGenres[i].name %>
+                            </h2>
+                            <img class="genres__image" src="/icon/<%= cartoonGenres[i].image %>">
+                        </div>
+                    </a>
+                <% } %>
+            <% } %>   
+ 
+    </div>
+
+
+<%- include('../particles/footer.ejs') %>
+

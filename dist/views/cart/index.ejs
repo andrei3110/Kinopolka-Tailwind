@@ -1,0 +1,30 @@
+<%- include('../particles/header.ejs') %>
+<div class="content">
+    <div class="film">
+        <% for (let i=0; i < items.length; i++) { %>
+
+        <a href="/items/<%= items[i].id %>/show" class="descrip">
+            <div class="film__object">
+                <h2 class="film__name">
+                    <%= items[i].name %>
+                </h2>
+                <div class="film__country">
+                    <%= items[i].country %>
+                </div>
+
+                <div class="film__genre">
+                    <%= items[i].genre %>
+                </div>
+                <img class="film__image" src="/img/<%= items[i].image %>">
+                <div>
+                    <form action="/delete__Video/<%= items[i].id %>" method="post">
+                        <button class="delete__moves__basket" type="submit"><%- include('../icons/remove__icon__basket.ejs') %></button>
+                    </form>
+                </div>
+            </div>
+        </a>
+        <% } %>
+    </div>
+</div>
+
+<%- include('../particles/footer.ejs') %>

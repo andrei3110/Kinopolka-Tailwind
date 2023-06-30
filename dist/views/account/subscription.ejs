@@ -1,0 +1,24 @@
+<%- include('../particles/header.ejs') %>
+
+<div class="subscribe__content">
+    
+        <div class="subscribe__text__all">
+
+            <font class="subscription__text__text">Платные Фильмы, Сериалы, Мультфильмы по подписке</font>
+        <font class="subscribe__text__name" color="red">Kino +</font>
+        <p><font class="subscribe__text__date" color="#7B68EE">30 дней бесплатно</font></p>
+        </div>
+        
+        <% if (subscription == "Free" || subscription == undefined ) { %>
+            <form action="/arrange" method="post">
+                <input class="sub__button"  type="submit" value="Оформить подписку">
+            </form>
+            <% } else if (subscription == "Subscription") { %>
+                <form action="/disarrange" method="post">
+                    <input class="sub__button"  type="submit" value="отказаться от подписки">
+                </form>
+                <% } %>
+</div>
+</body>
+
+</html>

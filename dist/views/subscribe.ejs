@@ -1,0 +1,27 @@
+<%- include('particles/header.ejs') %>
+
+    <div class="content">
+       
+            <div class="sub__information" >
+                 <div class="sub__name">
+               <font size="60px" color="white">Подписка</font>  <font size="50px" color="red" >Kino+</font> 
+                <p><font size="5px" color="white" >доступ к платным фильмам вы не получите</font></p>
+            </div>
+            <div class="sub__date">
+                0 дней бесплатно
+            </div>
+            <% if (subscription == "Free" || subscription == undefined ) { %>
+            <form action="/arrange" method="post">
+                <input class="sub__button"  type="submit" value="Оформить подписку">
+            </form>
+            <% } else if (subscription == "Subscription") { %>
+                <form action="/disarrange" method="post">
+                    <input class="sub__button"  type="submit" value="отказаться от подписки">
+                </form>
+                <% } %>
+            </div>
+           
+
+</div>
+        <%- include('particles/footer.ejs') %>
+   

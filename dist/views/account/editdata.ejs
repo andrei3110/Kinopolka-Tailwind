@@ -1,0 +1,44 @@
+<%- include('../particles/header.ejs') %>
+  <div class="content">
+    <center>
+      <div class="block">
+        <div class="title__edit">
+          <h1>Давайте изменим ваш пароль!</h1>
+        </div>
+
+
+        <form class="form__data" action="/editPassword" method="post">
+
+
+          <div class="group">
+            <input class="input__edit" type="text" required name="currentPassword">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="lableText">Текущий пароль</label>
+          </div>
+
+          <div class="group">
+            <input class="input__edit" type="text" required name="lastPassword">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label class="lableText">Новый пароль</label>
+          </div>
+
+          <button class="btn__edit__profile" type="submit" value="Изменить">Изменить</button>
+          <div class="links">
+            <a href="/editName" class="editName">Изменить имя</a>
+            <a href="/editAvatar" class="editAvatar">Изменить аватар</a>
+  
+          </div>
+          
+        </form>
+      </div>
+    </center>
+
+  </div>
+
+
+
+
+
+  <%- include('../particles/footer.ejs') %>

@@ -1,0 +1,37 @@
+<%- include('../particles/header.ejs') %>
+    <div class="content">
+        <center>
+            <div class="block">
+                <form action="/editAvatar" method="post" enctype="multipart/form-data">
+                    <center><img class="edit__profile__img" src="./img/<%= users[0].avatar%>" style=""></center>
+
+
+
+                    <input class="input__file__edit" type='file' name="avatar" accept="image/png, image/jpeg">
+
+
+                    <div class="group">
+                        <input class="input__edit"  >
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+                        <label class="lableText">Подтвердите пароль</label>
+                    </div>
+
+                    <button class="btn__edit__profile" type="submit" value="Изменить">Изменить</button>
+                    <div class="links">
+                        <a href="/editProfile" class="editName">Изменить пароль</a>
+                        <a href="/editName" class="editAvatar">Изменить имя</a>
+              
+                      </div>
+                </form>
+            </div>
+        </center>
+
+
+    </div>
+
+
+
+
+
+    <%- include('../particles/footer.ejs') %>

@@ -1,0 +1,18 @@
+<%- include('../particles/header.ejs') %>
+
+<div class="content">
+    <div class="profile">
+        <div class="profile__user">
+            <img class="profile__img" src="./img/<%= users[0].avatar%>">
+            <p class="profile__info"><%= name %></p> 
+            <p class="profile__role">Статус: <br><span class="profile_uptext"><%= UserType %></p></span>
+            <p class="profile__inter"><span class="profile_upint"><%= BasketCount %></span> <br>фильмов</p>
+            <p class="profile__inter"><span class="profile_upint"><%= commentsCount %></span> <br>комментарий</p>
+            <p class="profile__inter"><span class="profile_upint"><%= commentsCount %></span> <br>оценок</p>
+            
+           <br> <a href="/editProfile" class="edit__data">Изменить профиль</a> 
+        </div>
+    </div>
+
+</div>
+<%- include('../particles/footer.ejs') %>
