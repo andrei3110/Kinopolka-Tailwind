@@ -301,7 +301,13 @@ class ItemsController {
                     id: Number(id)
                 }
             });
+            const comment = yield prisma.comments.findMany({
+                where: {
+                    move__id: Number(items[0].id)
+                }
+            });
             res.render('description', {
+                'comment': comment,
                 auth: req.session.auth,
                 status: req.session.status,
                 admin: req.session.admin,

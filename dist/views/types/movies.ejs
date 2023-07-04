@@ -9,24 +9,23 @@
                 <% for (let i=0; i < items.length; i++) { %>
 
                     <a href="/des__film/<%= items[i].id %>" class="descrip">
-                        <div class="w-[80%] h-40 p-1 bg-slate-200 relative t-5 brder-b-1 mx-auto border-gray-600"
-                            id="film__object">
+                        <div class="transition w-[80%] h-40 p-1 bg-white relative t-5 border-b-2 border-gray-300 mx-auto hover:bg-[#dadada] duration-600 hover:scale-[102%]  duration-600 hover:shadow-2xl shadow-blue-800 hover:z-20" id="film__object">
 
-                            <h2 class="absolute left-36   pl-13 text-2xl text-black">
+                            <h2 class="absolute left-36 font-semibold  pl-13 text-2xl text-black">
                                 <%= items[i].name %>
                             </h2>
-                            <div class="absolute left-52 top-24 text-lg text-black">
+                            <div class="absolute left-36 top-24  text-black">
                                 <%= items[i].country %>
                             </div>
-                            <div class="absolute left-52 top-16 text-xl text-black">
+                            <div class="absolute left-36 top-16 text-lg text-black"> 
                                 <%= items[i].genre %>
                             </div>
                             <% if (items[i].status=="бесплатно" ) { %>
-                                <div class="film__status free">
+                                <div class="absolute z-10 text-white px-4 bg-gray-700  00 opacity-70 bottom-2 ">
                                     <%= items[i].status %>
                                 </div>
                                 <% } else { %>
-                                    <div class="film__status sub">
+                                    <div class="absolute z-10 text-white px-4 bg-red-500 opacity-70 bottom-2">
                                         <%= items[i].status %>
                                     </div>
 

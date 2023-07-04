@@ -1,129 +1,149 @@
 <%- include('../particles/header.ejs') %>
 
-    <div class="content__description">
-        <div class="header__image">
+    <div class="min-h-screen max-w-screen-2xl  mx-auto bg-[#dfdfdf]">
+        <!-- <div class="max-w-20 h-80">
             <div class="gradient"><img class="fone__image" src="/img/человекПаук.jpg"></div>
-        </div>
+        </div> -->
 
-        <div class="description__film" id="films">
-            <div class="description__film__wrapper">
+        <div class="max-w-6xl min-h-screen p-5 bg-white  relative mx-auto" id="films">
+            <div class="">
                 <input type="hidden" name="nameId" value="<%= items.name %>">
-                <img class="description__image" src="/img/<%= items.image %>">
-                <h2 class="description__name" id="name">
-                    <%= items.name %>
-                </h2>
-                <span class="about__film">О фильме:</span>
-                <div class="description__information">
-                    <div class="description__genre" id="genre">
-                        <div class="title__text">Жанр:</div><span class="textViews" id="textViews">
-                            <%= items.genre %>
-                        </span>
-                    </div>
-                    <div class="description__country" id="country">
-                        <div class="title__text">Страна: </div> <span class="textViews" id="textViews">
-                            <%= items.country %>
-                        </span>
-                    </div>
-
-
-                    <div class="description__year">
-                        <div class="title__text">год:</div> <span class="textViews" id="textViews">
-                            <%= items.year %>
-                        </span>
-                    </div>
-                </div>
-                <div class="role">
-                    <div class="role--hidden__title">В главных ролях:</div>
-                    <div class="description__producer" id="producer">
-                        <div class="title__text">продюсер:</div> <span class="textViews" id="textViews">
-                            <%= items.producer %>
-                        </span>
-                    </div>
-                    <div class="description__actor" id="actor">
-                        <div class="title__text">в главных ролях:</div>
-                        <span class="textViews" id="textViews">
-                            <%= items.actor %>
-                        </span>
-                    </div>
-                    <div class="description__screenwriter" id="screenwriter">
-                        <div class="title__text">сценарист:</div> <span class="textViews " id="textViews">
-                            <%= items.screenwriter %>
-                        </span>
-                    </div>
-                    <div class="description__operator" id="operator">
-                        <div class="title__text">оператор:</div> <span class="textViews" id="textViews">
-                            <%= items.operator%>
-                        </span>
-                    </div>
-                    <div class="description__regicer" id="regicer">
-                        <div class="title__text">режиссер:</div> <span class="textViews" id="textViews">
-                            <%= items.regicer %>
-                        </span>
-                    </div>
-
-                </div>
-                <a href="#" class="description__AddToCart"><%- include('../icons/bookmark__icon.ejs') %></a>
-
-
-                <div class="description__description" id="description">
-                    <div class="title__text">описание:</div>
-                    <p>
-                        <%= items.description %>
-                    </p>
-
+                <div class="relative text-center top-28 w-full bg-slate-200">
+                    <h2 class="relative   text-5xl font-bold" id="name">
+                        <%= items.name %>
+                    </h2>
                 </div>
 
-                <div class="averange" id="averange">
-                    <% if (number>= 4.5) { %>
-                        <font size="5" class="rate__name">рейтинг:</font>
 
-                        <div class="rate__count five">
-                            <span class="averangeText" id="averangeText">
-                                <%= number %>
-                            </span>
+                <div class="relative top-32 w-96">
+                    <img class=" h-96 w-[255px] absolute  top-0" src="/img/<%= items.image %>">
 
-                        </div>
+                    <div class="absolute mt-3 w-64 h-20 top-96 text-xl  text-black rounded-xl bg-slate-300"
+                        id="averange">
+                        <% if (number>= 4.5) { %>
+                            <font size="5" class="relative top-3 ml-5">рейтинг:</font>
 
-                        <% } else if(number>= 3.5) { %>
-                            <font size="5" class="rate__name">рейтинг:</font>
-
-                            <div class="rate__count four">
+                            <div
+                                class="w-20 text-center py-5 my-2 mr-1 bg-lime-600 text-white font-semibold rounded-lg relative float-right">
                                 <span class="averangeText" id="averangeText">
                                     <%= number %>
                                 </span>
 
                             </div>
-                            <% } else if( number>= 2 ) { %>
-                                <font size="5" class="rate__name">рейтинг:</font>
+                            <% } else if(number>= 3.5) { %>
+                                <font size="5" class="relative top-3 ml-5">рейтинг:</font>
 
-                                <div class="rate__count three">
+                                <div
+                                    class="w-20 text-center py-5 my-2 mr-1 bg-yellow-200 text-white font-semibold rounded-lg relative float-right">
                                     <span class="averangeText" id="averangeText">
                                         <%= number %>
                                     </span>
 
                                 </div>
-                                <% } else { %>
-                                    <font size="5" class="rate__name">рейтинг:</font>
+                                <% } else if( number>= 2 ) { %>
+                                    <font size="5" class="relative top-3 ml-5">рейтинг:</font>
 
-                                    <div class="rate__count two">
+                                    <div
+                                        class="w-20 text-center py-5 my-2 mr-1 bg-orange-500 text-white font-semibold rounded-lg relative float-right">
                                         <span class="averangeText" id="averangeText">
                                             <%= number %>
                                         </span>
 
                                     </div>
-                                    <% } %>
-                                        <div class="voices" id="voices">
-                                            всего голосов:<span class="textVoises" id="textViews">
-                                                <%= voices %>
-                                            </span></div>
+                                    <% } else { %>
+                                        <font size="5" class="relative top-3 ml-5">рейтинг:</font>
+
+                                        <div
+                                            class="w-20 text-center py-5 my-2 mr-1 bg-red-600 text-white font-semibold rounded-lg relative float-right">
+                                            <span class="averangeText" id="averangeText">
+                                                <%= number %>
+                                            </span>
+
+                                        </div>
+                                        <% } %>
+                                            <div class="relative ml-5 text-sm top-6" id="voices">
+                                                всего голосов:<span class="textVoises" id="textViews">
+                                                    <%= voices %>
+                                                </span></div>
+                    </div>
+
+                    <span class="relative text-2xl font-bold left-80 top-8 ">О фильме:</span>
+                    <div class="relative top-12">
+
+                        <div class=" absolute top-0 text-lg    left-96 " id="genre">
+                            <div class="title__text">Жанр:</div>
+                            <span class="relative bottom-6  font-bold float-left left-72" id="textViews">
+                                <%= items.genre %>
+                            </span>
+                        </div>
+
+                        <div class=" absolute top-8  text-lg   left-96  " id="country">
+                            <div class="title__text">Страна: </div> <span
+                                class="relative bottom-6 font-bold float-left left-72" id="textViews">
+                                <%= items.country %>
+                            </span>
+                        </div>
+
+                        <div class=" absolute top-16 text-lg   left-96">
+                            <div class="title__text">год:</div> <span
+                                class="relative bottom-6 font-bold float-left left-72" id="textViews">
+                                <%= items.year %>
+                            </span>
+                        </div>
+
+                        <div class="absolute top-24  text-lg  left-96" id="actor">
+                            <div class="title__text">актеры:</div>
+                            <span class="relative bottom-6 font-bold float-left left-72" id="textViews">
+                                <%= items.actor %>
+                            </span>
+                        </div>
+                        <div class="absolute top-32  text-lg  left-96" id="producer">
+                            <div class="title__text">продюсер:</div> <span
+                                class="relative bottom-6 font-bold float-left left-72 " id="textViews">
+                                <%= items.producer %>
+                            </span>
+                        </div>
+
+                        <div class="absolute top-40  text-lg   left-96" id="screenwriter">
+                            <div class="title__text">сценарист:</div> <span
+                                class="relative bottom-6 font-bold float-left left-72 " id="textViews">
+                                <%= items.screenwriter %>
+                            </span>
+                        </div>
+                        <div class="absolute top-48  text-lg   left-96" id="operator">
+                            <div class="title__text">оператор:</div> <span
+                                class="relative bottom-6 font-bold float-left left-72" id="textViews">
+                                <%= items.operator%>
+                            </span>
+                        </div>
+                        <div class="absolute top-56  text-lg  left-96" id="regicer">
+                            <div class="title__text">режиссер:</div> <span
+                                class="relative bottom-6 font-bold float-left left-72" id="textViews">
+                                <%= items.regicer %>
+                            </span>
+                        </div>
+
+
+                        <a href="#" class="description__AddToCart"><%- include('../icons/bookmark__icon.ejs') %></a>
+
+
+                        <div class="absolute top-80  text-lg  left-96 " id="description">
+                            <div class="title__text">описание:</div>
+                            <p>
+                                <%= items.description %>
+                            </p>
+
+                        </div>
+                    </div>
                 </div>
+
 
 
                 <% if (items.status=="бесплатно" ) { %>
                     <!-- FREE -->
-                    <% } else { %>
-                        <!-- SUBSCRIBE -->
-                        <% } %>
+                <% } else { %>
+                    <!-- SUBSCRIBE -->
+                <% } %>
 
             </div>
             <div>
@@ -131,117 +151,118 @@
                 <!-- <iframe class="video" width="560" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
             </div>
 
-            <div class="ratingForm" id="rating-wrapper">
-
-                <form action="/rating/<%= items.id %>" method="post" id="rate-form">
-
-                    <!-- <input type="hidden" name="item__name" value="<%= items.name %>"> -->
 
 
-                    <% if (auth) { %>
-
-                        <div class="container" id="container">
-                            <div class="post">
-                                <div class="text">Thanks for rating us !</div>
-                                <div class="edit">EDIT</div>
-                            </div>
-                            <div class="star-widget">
-                                <% for (let i=5; i> 0; i--) { %>
-                                    <input type="radio" name="rate" id="rate-<%= i %>" value="<%= i %>">
-                                    <label for="rate-<%= i %>" class="star__icon"><%- include('../icons/star__icon.ejs')
-                                            %></label>
-                                    <% } %>
-
-
-                                        <div>
-
-                                            <div class="textarea">
-                                                <textarea cols="30" placeholder="Describe your  experense..."
-                                                    type="text" name="text" required></textarea>
-                                            </div>
-                                            <div class="Btn">
-                                                <p onclick="createRate()" id="button">Post</p>
-                                            </div>
-                                        </div>
-
-                            </div>
-                        </div>
-
-                        <% if (mark) { %>
-                            <script>
-                                const post = document.querySelector(".post")
-                                const widget = document.querySelector(".star-widget")
-
-
-                                i == true;
-                                widget.style.display = "block";
-                                post.style.display = "none";
-                            </script>
-                            <% } else { %>
-                                <script>
-                                    const button = document.getElementById("button")
-                                    const post = document.querySelector(".post")
-                                    const widget = document.querySelector(".star-widget")
-                                    const editBtn = document.querySelector(".edit")
-                                    let i = true;
-
-
-                                    widget.style.display = "none";
-                                    post.style.display = "block";
-
-                                    button.addEventListener("click", () => {
-                                        widget.style.display = "none";
-                                        post.style.display = "block";
-                                        i = false;
-                                        return false;
-                                    })
-                                </script>
-
-                                <% } %>
-                                    <% } %>
-                </form>
-            </div>
-            <script>
-                async function createRate() {
-                    const post = document.querySelector(".post")
-                    const widget = document.querySelector(".star-widget")
-                    let ratingWrapper = document.querySelector('#rating-wrapper');
-                    let RateForm = document.querySelector('#rate-form');
-
-                    let rateFormData = new FormData(RateForm);
-                    // ratingWrapper.innerHTML = '';
-                    widget.style.display = "none";
-                    post.style.display = "block";
-
-                    await fetch(RateForm.action, {
-                        'method': 'POST',
-                        'body': JSON.stringify({
-                            'rate': rateFormData.get('rate'),
-                            'text': rateFormData.get('text'),
-
-                        }),
-                        'headers': {
-                            'Content-Type': 'application/json',
-                        }
-                    })
-
-
-
-                }
-
-
-            </script>
 
             <div class="comment" id="comment">
 
                 <div class="commentName">Комментарии:</div>
 
                 <div class="comment__wrapper" id="comment-wrapper">
-                    
+
                 </div>
             </div>
         </div>
-    </div>                         
+        <!-- //////////////////////////////////////////////////////////////// -->
+
+        <div class=" relative mx-auto my-4  text-center  bg-slate-500 max-w-6xl  bottom-2" id="rating-wrapper">
+
+            <form action="/rating/<%= items.id %>" method="post" id="rate-form">
+
+                <!-- <input type="hidden" name="item__name" value="<%= items.name %>"> -->
+
+
+                <% if (auth) { %>
+
+                    <div class="grid text-center place-items-center bg-white  relative mx-auto my-4 items-center justify-center flex-col  max-w-6xl"
+                        id="container">
+                        <div id="post" class="hidden">
+                            <div class=" text-xl py-6 text-gray-700">Thanks for rating us !</div>
+
+                        </div>
+                        <div id="star-widget" class="text-center items-center justify-center">
+                            <ul class="grid text-center w-full grid-cols-5">
+                                <% for (let i=0; i < 5; i++) { %>
+
+                                    <li class="m-0">
+                                        <input type="radio" name="rate" id="rate-<%= i %>" class=" hidden peer"
+                                            value="<%= i %>" required>
+                                        <label for="rate-<%= i %>"
+                                            class="float-right text-2xl  text-gray-500 p-2 peer-checked:text-blue-600"><%- include('../icons/star__icon.ejs') %></label>
+                                    </li>
+                                    <% } %>
+                            </ul>
+
+                            <div class="relative ">
+
+                                <div class="h-full outline-none p-2 text-xl w-full overflow-hidden">
+                                    <textarea cols="30" placeholder="Describe your  experense..." type="text"
+                                        name="text" required></textarea>
+                                </div>
+                                <div class="p-3 text-xl text-gray-600  w-full text-center mb-2 bg-slate-300">
+                                    <p onclick="createRate()" id="button">Post</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <% if (mark == false ) { %>
+                       
+                            <script>
+                                const button = document.getElementById("button")
+                                const post = document.getElementById("post")
+                                const widget = document.getElementById("star-widget")
+                                const editBtn = document.getElementById("edit")
+
+                                widget.classList.toggle("hidden");
+                                post.classList.toggle("hidden");
+
+                                button.addEventListener("click", () => {
+                                    widget.classList.toggle("bg-green-400")
+                                    post.classList.toggle("block");
+                                })
+                            </script>
+
+                            <% } %>
+                                <% } %>
+
+                                    <script>
+                                        async function createRate() {
+                                            const post = document.getElementById("post")
+                                            const widget = document.getElementById("star-widget")
+                                            let ratingWrapper = document.getElementById('rating-wrapper');
+                                            let RateForm = document.getElementById('rate-form');
+
+                                            let rateFormData = new FormData(RateForm);
+                                            // ratingWrapper.innerHTML = '';
+                                            widget.classList.toggle("hidden");
+                                            post.classList.toggle("hidden");
+
+                                            await fetch(RateForm.action, {
+                                                'method': 'POST',
+                                                'body': JSON.stringify({
+                                                    'rate': rateFormData.get('rate'),
+                                                    'text': rateFormData.get('text'),
+
+                                                }),
+                                                'headers': {
+                                                    'Content-Type': 'application/json',
+                                                }
+                                            })
+
+
+
+                                        }
+
+
+                                    </script>
+            </form>
+        </div>
+
+
+    </div>
+
 
     <script>
         async function getCommentAndShow() {
@@ -251,7 +272,7 @@
             let response = await fetch('/api/v1/comments/<%= items.id %>/show');
 
             let comments = await response.json();
-           
+
             comments[1].forEach(comment => {
                 commentWrapper.innerHTML += `<div class="comment__box">
                     <div name="userName" class="commentUsername">${comment.user__name}</div>
@@ -276,4 +297,4 @@
 
 
 
-    <%- include('../particles/footer.ejs') %>
+    <!-- <%- include('../particles/footer.ejs') %> -->
