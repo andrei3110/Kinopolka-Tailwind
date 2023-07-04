@@ -44,15 +44,13 @@
                                                     <input type="hidden" value="<%= items[i].star %>" name="star">
                                                     <input type="hidden" value="<%= items[i].genre %>" name="genre">
                                                     <input type="hidden" value="<%= items[i].image %>" name="image">
-                                                    <button class="save__InBasket" type="submit"><%-
-                                                            include('../icons/bookmark__icon.ejs') %><span
-                                                                class="save__InBasket--text">В избранное</span></button>
+                                                    <button class="relative  p-1 right-2 top-2 float-right  bg-slate-400 mr-3 hover:bg-gray-200 duration-700" type="submit">
+                                                        <%- include('../icons/bookmark__icon.ejs') %></button>
 
                                                 </form>
                                                 <% if (admin) { %>
                                                     <form action="/delete__movies/<%= items[i].id %>" method="post">
-                                                        <button class="delete__moves"><%-
-                                                                include('../icons/delete__icon.ejs') %></button>
+                                                        <button class=" transition relative  p-1 right-4 top-2 float-right mr-3 hover:bg-gray-200 duration-700"><%- include('../icons/delete__icon.ejs') %></button>
                                                     </form>
 
                                                     <% } %>

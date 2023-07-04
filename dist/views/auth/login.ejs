@@ -1,25 +1,25 @@
 <%- include('../particles/header.ejs') %>
-<div class="content__auth">
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
 
     <form action="/login" method="post">
 
-        <div class="vhod">
+        <div class="w-96 h-96 rounded-3xl bg-gray-300 shadow-2xl shadow-gray-700/50 mx-auto p-3 relative top-56">
             <div class="auth__decoration">
-                <div class="auth__icon"><%- include('../icons/auth__user__icon.ejs') %></div>
-                <div class="circle"></div>
+                <div class="absolute -top-28 text-gray-400  z-10 left-24"><%- include('../icons/auth__user__icon.ejs') %></div>
+                <div class="absolute  w-40 -top-24 h-40 left-28 shadow-2xl shadow-gray-800/50  rounded-full bg-gray-300"></div>
             </div>
-            <div class="vhod__block-inputs">
-                <span class="input__addon__name">
+            <div class="text-center relative top-12">
+                <span class="absolute left-0 text-gray-500 top-[70px]">
                     <%- include('../icons/user__login__icon.ejs') %>
                 </span>
-                <input class="input__vhod" name="name" placeholder="Введите имя" required>
-                <span class="input__addon__key"><%- include('../icons/key__icon.ejs') %>
+                <input class="relative w-3/4 mx-auto inline-block shadow-2xl shadow-gray-700/50 p-3 top-16" name="name" placeholder="Введите имя" required>
+                <span class="absolute left-0 text-gray-500  top-[130px]"><%- include('../icons/key__icon.ejs') %>
                 </span>
-                <input class="input__vhod" id="Textinput" type="password" name="password" placeholder="Введите пароль" required>
+                <input type="password" class="relative w-3/4 mx-auto inline-block shadow-2xl shadow-gray-700/50 p-3 top-20" id="Textinput" name="password" placeholder="Введите пароль" required>
             </div>
 
-            <input type="submit" class="vhod__btn" value="Войти">
-            <a href="/register" class="registration">Зарегистрироваться</a>
+            <button type="submit" class="relative w-3/4 mx-auto bg-gray-600 text-white inline-block shadow-2xl shadow-gray-700/80 p-3 top-44 left-10" value="">Войти</button>
+            <a href="/register" class="absolute bottom-4 text-gray-600 left-28">Зарегистрироваться</a>
         </div>
 
     </form>
