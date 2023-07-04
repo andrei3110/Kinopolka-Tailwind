@@ -154,14 +154,7 @@
 
 
 
-            <div class="comment" id="comment">
-
-                <div class="commentName">Комментарии:</div>
-
-                <div class="comment__wrapper" id="comment-wrapper">
-
-                </div>
-            </div>
+            
         </div>
         <!-- //////////////////////////////////////////////////////////////// -->
 
@@ -260,7 +253,14 @@
             </form>
         </div>
 
+        <div class="relative max-w-6xl mx-auto text-gray-700 p-7  bottom-3 h-full bg-white" id="comment">
 
+            <div class="relative  text-4xl float-left block ">Комментарии:</div>
+
+            <div class="relative mt-20" id="comment-wrapper">
+
+            </div>
+        </div>
     </div>
 
 
@@ -274,9 +274,9 @@
             let comments = await response.json();
 
             comments[1].forEach(comment => {
-                commentWrapper.innerHTML += `<div class="comment__box">
-                    <div name="userName" class="commentUsername">${comment.user__name}</div>
-                    <div name="text" class="commentText">${comment.text}</div>
+                commentWrapper.innerHTML += `<div class="max-w-5xl min-h-[100px] relative  m-1 bg-gray-200 mx-auto">
+                    <div name="userName" class="w-max relative right-0 text-left top-1 ml-3 border-b border-b-2px border-gray-700 font-bold">${comment.user__name}</div>
+                    <div name="text" class="relative m-3 float-left left-3">${comment.text}</div>
                 </div> 
                 <% if (auth) { %>
                         <% if (items.name == name || admin) { %>

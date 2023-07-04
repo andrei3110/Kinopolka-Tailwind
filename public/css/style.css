@@ -1214,6 +1214,26 @@ input:checked + .toggle-bg {
   top: 80px;
 }
 
+.bottom-4 {
+  bottom: 1rem;
+}
+
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.left-3 {
+  left: 0.75rem;
+}
+
+.top-10 {
+  top: 2.5rem;
+}
+
+.top-1 {
+  top: 0.25rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1262,6 +1282,18 @@ input:checked + .toggle-bg {
   margin: 1.5rem;
 }
 
+.m-1 {
+  margin: 0.25rem;
+}
+
+.m-3 {
+  margin: 0.75rem;
+}
+
+.m-4 {
+  margin: 1rem;
+}
+
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -1290,6 +1322,16 @@ input:checked + .toggle-bg {
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.my-0 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .mb-1 {
@@ -1350,6 +1392,18 @@ input:checked + .toggle-bg {
 
 .mt-5 {
   margin-top: 1.25rem;
+}
+
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
 }
 
 .block {
@@ -1472,6 +1526,10 @@ input:checked + .toggle-bg {
   min-height: 100vh;
 }
 
+.min-h-\[100px\] {
+  min-height: 100px;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -1552,12 +1610,21 @@ input:checked + .toggle-bg {
   width: 100%;
 }
 
+.w-max {
+  width: -moz-max-content;
+  width: max-content;
+}
+
 .max-w-6xl {
   max-width: 72rem;
 }
 
 .max-w-screen-2xl {
   max-width: 1536px;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
 }
 
 .flex-1 {
@@ -1755,6 +1822,10 @@ input:checked + .toggle-bg {
   border-right-width: 2px;
 }
 
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-blue-600 {
   --tw-border-opacity: 1;
   border-color: rgb(28 100 242 / var(--tw-border-opacity));
@@ -1933,6 +2004,11 @@ input:checked + .toggle-bg {
   background-color: rgb(188 240 218 / var(--tw-bg-opacity));
 }
 
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -1959,6 +2035,10 @@ input:checked + .toggle-bg {
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-7 {
+  padding: 1.75rem;
 }
 
 .px-2 {
@@ -2036,6 +2116,10 @@ input:checked + .toggle-bg {
 
 .pt-1 {
   padding-top: 0.25rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
