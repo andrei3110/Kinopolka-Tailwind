@@ -44,8 +44,8 @@
                                     <font size="5" class="relative top-3 ml-5">рейтинг:</font>
 
                                     <div
-                                        class="w-20 text-center py-5 my-2 mr-1 bg-orange-500 text-white font-semibold rounded-lg relative float-right">
-                                        <span class="averangeText" id="averangeText">
+                                        class="w-20 text-center py-5 my-1 mr-1 bg-orange-500 text-white font-semibold rounded-lg relative float-right">
+                                        <span class="text-3xl" id="averangeText">
                                             <%= number %>
                                         </span>
 
@@ -175,7 +175,7 @@
                         </div>
                         <div id="star-widget" class="text-center items-center justify-center">
                             <ul class="grid text-center w-full grid-cols-5">
-                                <% for (let i=0; i < 5; i++) { %>
+                                <% for (let i=1; i < 6; i++) { %>
 
                                     <li class="m-0">
                                         <input type="radio" name="rate" id="rate-<%= i %>" class=" hidden peer"
@@ -277,17 +277,18 @@
                 commentWrapper.innerHTML += `<div class="max-w-5xl min-h-[100px] relative  m-1 bg-gray-200 mx-auto">
                     <div name="userName" class="w-max relative right-0 text-left top-1 ml-3 border-b border-b-2px border-gray-700 font-bold">${comment.user__name}</div>
                     <div name="text" class="relative m-3 float-left left-3">${comment.text}</div>
-                </div> 
-                <% if (auth) { %>
+                    <% if (auth) { %>
                         <% if (items.name == name || admin) { %>
                     <form action="/delete/comment/${comment.id}" method="post">
                         <input type="hidden" name="commentId" value=" ${comment.id}">
                         <input type="hidden" name="itemsID" value="<%= items.id %>">
                         <input type="hidden" name="commentName" value=" ${comment.user__name}">
-                        <input class="absolute float-right right-12 top-3 hover:bg-white duration-700 p-1" type="submit" value="delete">
+                        <input class="relative float-right right-12 top-3 hover:bg-white duration-700 p-1" type="submit" value="delete">
                     </form>
                     <% } %>
                 <% } %>
+                </div> 
+                
                 `;
             });
         }
