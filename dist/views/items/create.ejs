@@ -1,28 +1,28 @@
 <%- include('../particles/header.ejs') %>
 
 
-    <div class="content">
+    <div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
         <a href="/addGenres">жанры</a>
         <a href="/addCategories">Категории</a>
         <form action="/AddItems" enctype="multipart/form-data" method="post" id="item-form">
 
-            <div class="create__genre">
+            <div class="w-max inline-block relative top-20 left-4">
                 <% for (let i=0; i < genres.length; i++) { %>
-                    <div class="create__genre--items">
+                    <div class="relative block  ">
                         <input type="checkbox" class="checkbox" name="check" value="<%= genres[i].id %>">
-                        <label class="create__genre--items__name">
+                        <label class="text-gray-700">
                             <%= genres[i].name %>
                         </label>
                     </div>
                     <% } %>
             </div>
 
-            <div class="create__item__block1">
-                <input class="create__item--items" name="description" placeholder="описание">
+            <div class="text-center w-96  left-20 inline-block bottom-10 relative">
+                <input class="w-80 h-14" name="description" placeholder="описание">
 
                 <% for (let i=0; i < categories.length; i++) { %>
                     <div class="create__radio__items">
-                        <input type="radio" class="radio" name="check__radio" value="<%= categories[i].id %>">
+                        <input type="radio" class="block float-left left-20 relative " name="check__radio" value="<%= categories[i].id %>">
                         <label class="radio__items">
                             <%= categories[i].name %>
                         </label>
@@ -30,37 +30,35 @@
 
 
                     <% } %>
-
-
-                        <input class="create__item--items" name="country" placeholder="страна" required>
-                        <input class="create__item--items" name="name" placeholder="имя" required>
+                        <input class="w-80 h-14" name="country" placeholder="страна" required>
+                        <input class="w-80 mt-1 h-14" name="name" placeholder="имя" required>
 
             </div>
-            <div class="create__item__block2">
-                <input class="create__item--items" name="year" placeholder="год" required>
+            <div class="text-center w-80 inline-block top-24 relative float-right right-20">
+                <input class="w-80 mt-1 h-14" name="year" placeholder="год" required>
 
                 <div class="create__radio__items">
-                    <input type="radio" class="radio" name="status" value="подписка">
+                    <input type="radio" class="block float-left left-20 relative" name="status" value="подписка">
                     <label class="radio__items">подписка</label>
                 </div>
                 <div class="create__radio__items">
-                    <input type="radio" class="radio" name="status" value="бесплатно">
+                    <input type="radio" class="block float-left left-20 relative" name="status" value="бесплатно">
                     <label class="radio__items">бесплатно</label>
                 </div>
 
 
-                <input class="create__item--items" name="video" placeholder="видео" required>
-                <input class="create__item--items" name="treller" placeholder="трейлер" required>
+                <input class="w-80 mt-1 h-14" name="video" placeholder="видео" required>
+                <input class="w-80 mt-1 h-14" name="treller" placeholder="трейлер" required>
                 <input type="file" name="file" accept="image/png, image/jpeg">
             </div>
-            <div class="cerate__description">
-                <input class="cerate__description--items" name="actor" placeholder="актеры" required>
-                <input class="cerate__description--items" name="producer" placeholder="продюсcер" required>
-                <input class="cerate__description--items" I name="regicer" placeholder="режиссер" required>
-                <input class="cerate__description--items" name="screenwriter" placeholder="сценарист" required>
-                <input class="cerate__description--items" name="operator" placeholder="оператор" required>
+            <div class="w-80 left-32  top-3 inline-block relative">
+                <input class="w-80 mt-1 h-14" name="actor" placeholder="актеры" required>
+                <input class="w-80 mt-1 h-14" name="producer" placeholder="продюсcер" required>
+                <input class="w-80 mt-1 h-14" I name="regicer" placeholder="режиссер" required>
+                <input class="w-80 mt-1 h-14" name="screenwriter" placeholder="сценарист" required>
+                <input class="w-80 mt-1 h-14" name="operator" placeholder="оператор" required>
             </div>
-            <input class="btn AddBtn" value="опубликовать" onclick="createItem()">
+            <button class="relative w-80 left-48 bg-gray-600 text-white inline-block shadow-2xl shadow-gray-700/80 p-3 top-44  hover:shadow-xl hover:-translate-y-1 hover:bg-gray-500 duration-700" value="опубликовать" onclick="createItem()">опубликовать</button>
         </form>
 
         <script>
