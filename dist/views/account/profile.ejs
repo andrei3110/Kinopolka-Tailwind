@@ -1,16 +1,17 @@
 <%- include('../particles/header.ejs') %>
 
-<div class="content">
-    <div class="profile">
-        <div class="profile__user">
-            <img class="profile__img" src="./img/<%= users[0].avatar%>">
-            <p class="profile__info"><%= name %></p> 
-            <p class="profile__role">Статус: <br><span class="profile_uptext"><%= UserType %></p></span>
-            <p class="profile__inter"><span class="profile_upint"><%= BasketCount %></span> <br>фильмов</p>
-            <p class="profile__inter"><span class="profile_upint"><%= commentsCount %></span> <br>комментарий</p>
-            <p class="profile__inter"><span class="profile_upint"><%= commentsCount %></span> <br>оценок</p>
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
+    <div class="h-128 text-ccenter p-3  right-3 w-full overflow-hidden relative top-20 ">
+        <img src="/img/collage.jpg " class="absolute w-full z-10 mr-4  p-4 brightness-50 rounded-2xl">
+        <div class="text-center place-items-center justify-center">
+            <img class="relative mx-auto mt-10 shadow-2xl shadow-gray-100/50 w-44 h-44 rounded-full z-20" src="./img/<%= users[0].avatar%>">
+            <p class="relative text-white font-bold z-20 mt-2 text-2xl"><%= name %></p> 
+            <p class="relative text-white font-mono z-20 mt-2">Статус: <br><span class="text-xl"><%= UserType %></p></span>
+            <p class="relative text-white text-xl font-mono  z-20 mt-10 mx-2 inline-block"><span class="profile_upint"><%= BasketCount %></span> <br>фильмов</p>
+            <p class="relative text-white text-xl font-mono z-20 mt-2 mx-2 inline-block"><span class="profile_upint"><%= commentsCount %></span> <br>комментарий</p>
+            <p class="relative text-white text-xl font-mono  z-20 mt-2 mx-2 inline-block"><span class="profile_upint"><%= commentsCount %></span> <br>оценок</p>
             
-           <br> <a href="/editProfile" class="edit__data">Изменить профиль</a> 
+           <br> <a href="/editProfile" class="relative z-20  top-6 shadow-2xl shadow-gray-100/50 bg-red-700 text-white p-2 rounded-lg ">Изменить профиль</a> 
         </div>
     </div>
 

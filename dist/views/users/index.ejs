@@ -1,23 +1,23 @@
 <%- include('../particles/header.ejs') %>
 
-<div class="content">
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
 
-    <div class="film">
+    <div class="relative top-28 ">
 
         <% for (let i=0; i < users.length; i++) { %>
 
-        <div class="users__object" id="users__object">
-            <h2 class="users__name">
+        <div class="w-3/4 mx-auto bg-gray-300 h-28 mt-2" id="users__object">
+            <h2 class="text-gray-700 text-lg font-semibold block">
                 имя: <%= users[i].name %>
             </h2>
-            <h2 class="users__name">
+            <h2 class="text-gray-700 text-lg font-semibold block">
                 пароль: <%= users[i].password %>
             </h2>
         </div>
         </a>
         <form  action="/delete/users/<%= users[i].id %>" method="post">
-            <button class="delete__users"><%- include('../icons/remove__icon__basket.ejs') %></button>
-        </form>
+            <button class="relative float-right right-52 bottom-20 bg-orange-400 text-white "><%- include('../icons/remove__icon__basket.ejs') %></button>
+        </form> 
         <% } %>
     </div>
 

@@ -87,12 +87,14 @@ model attribute {
 
   attribute_values   attribute_attribute_values[]
 }
+
 model attribute_values {
   id       Int     @id @default(autoincrement())
   name      String? @db.VarChar(255)
 
   attribute   attribute_attribute_values[]
 }
+
 model attribute_attribute_values {
   relAttribute         attribute        @relation(fields:[attributeId], references: [id])
   attributeId             Int

@@ -1,24 +1,24 @@
 <%- include('../particles/header.ejs') %>
-<div class="content">
-    <div class="film">
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
+    <div class="relative top-28">
         <% for (let i=0; i < items.length; i++) { %>
 
-        <a href="/items/<%= items[i].id %>/show" class="descrip">
-            <div class="film__object">
-                <h2 class="film__name">
+        <a href="/des__film/<%= items[i].id %>" class="descrip">
+            <div class="transition w-[80%] h-40 p-1 bg-white relative t-5 border-b-2 border-gray-300 mx-auto hover:bg-[#dadada] duration-600 hover:scale-[102%]  duration-600 hover:shadow-2xl shadow-blue-800 hover:z-20">
+                <h2 class="absolute left-36 font-semibold  pl-13 text-2xl text-black">
                     <%= items[i].name %>
                 </h2>
-                <div class="film__country">
+                <div class="absolute left-36 top-24  text-black">
                     <%= items[i].country %>
                 </div>
 
-                <div class="film__genre">
+                <div class="absolute left-36 top-16 text-lg text-black">
                     <%= items[i].genre %>
                 </div>
-                <img class="film__image" src="/img/<%= items[i].image %>">
+                <img class="w-28 h-36 absolute top-2 left-2" src="/img/<%= items[i].image %>">
                 <div>
                     <form action="/delete__Video/<%= items[i].id %>" method="post">
-                        <button class="delete__moves__basket" type="submit"><%- include('../icons/remove__icon__basket.ejs') %></button>
+                        <button class=" transition relative  p-1 right-4 top-2 float-right mr-3 hover:bg-gray-200 duration-700" type="submit"><%- include('../icons/delete__icon.ejs') %></button>
                     </form>
                 </div>
             </div>

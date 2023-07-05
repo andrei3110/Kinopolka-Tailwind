@@ -1,60 +1,76 @@
 <%- include('particles/header.ejs') %>
 
-<div class="content">
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
 
-    <div class="genres__tags">
-        <div class="genres__tags__wrapper">
+    <div class="width-full  relative top-[100px] bg-[#7f7e7e] border-2 border-gray-700">
+        <div class="relative overflow-auto text-center width-auto ">
             <% for (let i=0; i < genres.length; i++) { %>
-                <form class="tags__form" action="/search/byGenre/<%= genres[i].id %>" method="post">
-                    <input type="submit" class="tags__item" name="name" value="<%= genres[i].name %>">
+                <form class="inline-block py-[10px] text-center" action="/search/byGenre/<%= genres[i].id %>"
+                    method="post">
+                    <input type="submit" class="inline-block h-10 text-white text-[15px] mx-[2px] bg-gray"
+                        name="name" value="<%= genres[i].name %>">
                 </form>
-            <% } %>
+                <% } %>
         </div>
     </div>
-
     <% if (searchMove) { %>
-        <span class="scroll-icon"><i class="fa fa-angle-up fa-4x" aria-hidden="true"></i></span>
-       
+        
+       <div class="relative top-28">
         
         <% for (let i=0; i < items.length; i++) { %>
-    
+
             <a href="/des__film/<%= items[i].id %>" class="descrip">
-                <div class="film__object" id="film__object">
-    
-                    <h2 class="film__name">
+                <div class="transition w-[80%] h-40 p-1 bg-white relative t-5 border-b-2 border-gray-300 mx-auto hover:bg-[#dadada] duration-600 hover:scale-[102%]  duration-600 hover:shadow-2xl shadow-blue-800 hover:z-20" id="film__object">
+
+                    <h2 class="absolute left-36 font-semibold  pl-13 text-2xl text-black">
                         <%= items[i].name %>
                     </h2>
-                    <div class="film__country">
+                    <div class="absolute left-36 top-24  text-black">
                         <%= items[i].country %>
                     </div>
-                    <div class="film__genre">
+                    <div class="absolute left-36 top-16 text-lg text-black"> 
                         <%= items[i].genre %>
                     </div>
-                    <img class="film__image" src="/img/<%= items[i].image %>">
-                    <div>
-    
-                            <% if (auth) { %>
-                                <form action="/save__Video" method="post">
-    
-                                    <input type="hidden" value="<%= items[i].name %>" name="name">
-                                    <input type="hidden" value=" <%= items[i].country %>"name="country">
-                                    <input type="hidden" value="<%= items[i].star %>" name="star">
-                                    <input type="hidden" value="<%= items[i].genre %>" name="genre">
-                                    <input type="hidden" value="<%= items[i].image %>" name="image">
-                                    <!-- <input type="hidden" value="<%= items[i].age %>" name="age"> -->
-                                    <button class="save__InBasket"  type="submit"><%- include('icons/bookmark__icon.ejs') %><span class="save__InBasket--text">В избранное</span></button>
-    
-                                </form>
-                                <% if (admin) { %>
-                                    <form action="/delete__moves/<%= items[i].id %>" method="post">
-                                        <button class="delete__moves"><%- include('icons/delete__icon.ejs') %></button>
-                                    </form>
-                                <% } %>
+                    <% if (items[i].status=="бесплатно" ) { %>
+                        <div class="absolute z-10 text-white px-4 bg-gray-700  00 opacity-70 bottom-2 ">
+                            <%= items[i].status %>
+                        </div>
+                        <% } else { %>
+                            <div class="absolute z-10 text-white px-4 bg-red-500 opacity-70 bottom-2">
+                                <%= items[i].status %>
+                            </div>
+
                             <% } %>
-                    </div>
+
+                                <img class="w-28 h-36 absolute top-2 left-2" src="/img/<%= items[i].image %>">
+                                <div>
+
+
+                                    <% if (auth) { %>
+                                        <form action="/save__Video/<%= items[i].id %>" method="post">
+
+                                            <input type="hidden" value="<%= items[i].name %>" name="name">
+                                            <input type="hidden" value=" <%= items[i].country %>"
+                                                name="country">
+                                            <input type="hidden" value="<%= items[i].star %>" name="star">
+                                            <input type="hidden" value="<%= items[i].genre %>" name="genre">
+                                            <input type="hidden" value="<%= items[i].image %>" name="image">
+                                            <button class="relative  p-1 right-2 top-2 float-right  bg-slate-400 mr-3 hover:bg-gray-200 duration-700" type="submit">
+                                                <%- include('icons/bookmark__icon.ejs') %></button>
+
+                                        </form>
+                                        <% if (admin) { %>
+                                            <form action="/delete__movies/<%= items[i].id %>" method="post">
+                                                <button class=" transition relative  p-1 right-4 top-2 float-right mr-3 hover:bg-gray-200 duration-700"><%- include('icons/delete__icon.ejs') %></button>
+                                            </form>
+
+                                            <% } %>
+                                                <% } %>
+                                </div>
                 </div>
             </a>
-        <% } %>
+            <% } %>
+        </div>
     <% } else { %>
         <!-- <span class="search-icon"><i class="fa fa-search fa-4x" aria-hidden="true"></i></span> -->
         <div class="not__found">по вашему запросу ничего не найдено</div>

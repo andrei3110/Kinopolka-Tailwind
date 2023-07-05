@@ -1,8 +1,8 @@
-<div class="bar__tags">
-    <div class="tags__wrapper">
-        <div class="bar__menu">
+<div class="top-24 relative border border-gray-500 bg-white">
+    <div class="relative mx-auto w-max bg-gray-400 overflow-auto whitespace-nowrap  text-center ">
+        <div class="w-max  mx-auto relative top-0 h-12 bg-slate-100">
             <% for (let i=0; i < attribute.length; i++) { %>
-                <a href="/filters/<%= attribute[i].id %>" class="bar__btn"><%= attribute[i].name %></a>
+                <a href="/filters/<%= attribute[i].id %>" class="w-max relative px-3 top-2 text-gray-500 bg-slate-100 "><%= attribute[i].name %></a>
             <% } %>
         </div>
     </div>

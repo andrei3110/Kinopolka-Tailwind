@@ -1,23 +1,23 @@
 <%- include('../particles/header.ejs') %>
 
 
-<div class="content">
+<div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
     <%- include('../particles/tags.ejs') %>
 
     
-        <div class="hollow"></div>        
+        <div class="mt-24">     
             <% for (let i=0; i < attribute_values.length; i++) { %>
 
                 <a href="/from/country/<%= attribute_values[i].name %>" >
-                    <div class="genre__object" id="genres__object">
+                    <div class="transition w-3/4 border-b-2 border-gray-300 relative  bg-white mx-auto hover:bg-[#dadada] duration-600 hover:scale-[102%]  duration-600 hover:shadow-2xl shadow-blue-800 hover:z-20" id="genres__object">
 
-                        <h2 class="genres__name">
+                        <h2 class="text-gray-800 text-2xl py-6 relative left-12 font-semibold">
                             <%= attribute_values[i].name %>
                         </h2>
                     </div>
                 </a>
             <% } %>
-            <div class="hollow"></div>     
+        </div>   
 
 </div>
 <%- include('../particles/footer.ejs') %>

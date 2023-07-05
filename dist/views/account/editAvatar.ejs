@@ -1,26 +1,24 @@
 <%- include('../particles/header.ejs') %>
-    <div class="content">
+    <div class="min-h-screen max-w-screen-2xl mx-auto bg-[#dfdfdf]">
         <center>
-            <div class="block">
+            <div class="relative inline-block h-128 p-5 bg-gray-300 mt-32 mx-auto shadow-2xl shadow-gray-700/50">
                 <form action="/editAvatar" method="post" enctype="multipart/form-data">
-                    <center><img class="edit__profile__img" src="./img/<%= users[0].avatar%>" style=""></center>
+                    <center><img class="w-44 h-44 rounded-full shadow-2xl shadow-gray-700/50" src="./img/<%= users[0].avatar%>" style=""></center>
 
 
 
-                    <input class="input__file__edit" type='file' name="avatar" accept="image/png, image/jpeg">
+                    <input class="mt-10" type='file' name="avatar" accept="image/png, image/jpeg">
 
 
-                    <div class="group">
-                        <input class="input__edit"  >
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label class="lableText">Подтвердите пароль</label>
+                    <div class="relative mb-11">
+                        <input class="text-5 block w-80 p-3 mt-12"  >
+                        <label class="text-lg text-gray-500">Подтвердите пароль</label>
                     </div>
 
-                    <button class="btn__edit__profile" type="submit" value="Изменить">Изменить</button>
+                    <button class="relative w-3/4 mx-auto bottom-10 bg-gray-600 text-white inline-block shadow-2xl shadow-gray-700/80 p-3  hover:shadow-xl hover:-translate-y-1 hover:bg-gray-500 duration-700" type="submit" value="Изменить">Изменить</button>
                     <div class="links">
-                        <a href="/editProfile" class="editName">Изменить пароль</a>
-                        <a href="/editName" class="editAvatar">Изменить имя</a>
+                        <a href="/editProfile" class="absolute bottom-5 text-blue-800 left-32">Изменить пароль</a>
+                        <a href="/editName" class="absolute bottom-10 text-blue-800 left-32">Изменить имя</a>
               
                       </div>
                 </form>
