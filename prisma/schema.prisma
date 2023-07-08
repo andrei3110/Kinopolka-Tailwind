@@ -29,22 +29,17 @@ model items {
   video        String?    @db.Text
   treller      String?    @db.Text
 
-  Genres        items__genres[]
+  attribute_values        items__attribute_values[]
   Users        basket[]
 }
-model genres {
-  id       Int     @id @default(autoincrement())
-  name     String
-  Items   items__genres[]
-}
 
-model items__genres {
+model items__attribute_values {
   relItem       items    @relation(fields:[itemId], references: [id])
   itemId        Int
-  relGenre      genres @relation(fields:[genreId], references: [id])
-  genreId       Int
+  relAttribute_values      attribute_values @relation(fields:[attribute_valuesId], references: [id])
+  attribute_valuesId       Int
 
-  @@id([itemId, genreId])
+  @@id([itemId, attribute_valuesId])
 }
 
 model users {
@@ -92,8 +87,10 @@ model attribute_values {
   id       Int     @id @default(autoincrement())
   name      String? @db.VarChar(255)
 
+  Items       items__attribute_values[]
   attribute   attribute_attribute_values[]
 }
+
 
 model attribute_attribute_values {
   relAttribute         attribute        @relation(fields:[attributeId], references: [id])
@@ -102,10 +99,4 @@ model attribute_attribute_values {
   attribute_valueId       Int
 
   @@id([attributeId, attribute_valueId])
-}
-
-model cartoonGenres {
-  id       Int     @id @default(autoincrement())
-  name     String? @db.VarChar(255)
-  image    String? @db.VarChar(255)
 }

@@ -23,9 +23,32 @@ class CategoriesController {
                     type: Number(id),
                 }
             });
-            const attribute = yield prisma.attribute.findMany({});
-            const genres = yield prisma.genres.findMany({});
-            const cartoons = yield prisma.cartoonGenres.findMany({});
+            const attributes = yield prisma.attribute.findMany({});
+            const attribute = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    name: true,
+                                    id: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr = [];
+            for (let i = 0; i < attribute[0].attribute_values.length; i++) {
+                // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+                arr.push({
+                    name: attribute[0].attribute_values[i].relAttribute_value.name,
+                    id: attribute[0].attribute_values[i].relAttribute_value.id
+                });
+            }
             req.session.category = Number(id);
             res.render('types/index', {
                 auth: req.session.auth,
@@ -34,18 +57,17 @@ class CategoriesController {
                 status: req.session.status,
                 category: req.session.category,
                 count: req.session.count,
-                'attribute': attribute,
+                'attribute': attributes,
                 'items': items,
                 'categories': categories,
-                'genres': genres,
-                'cartoonGenres': cartoons
+                'genres': arr,
             });
         });
     }
     movies(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const genres = yield prisma.genres.findMany({
+            const attribute_values = yield prisma.attribute_values.findMany({
                 where: {
                     id: Number(id)
                 },
@@ -62,8 +84,8 @@ class CategoriesController {
                 },
             });
             let arr = [];
-            for (let i = 0; i < genres[0].Items.length; i++) {
-                arr.push(genres[0].Items[i].relItem.id);
+            for (let i = 0; i < attribute_values[0].Items.length; i++) {
+                arr.push(attribute_values[0].Items[i].relItem.id);
             }
             for (let i = 0; i < arr.length; i++) {
             }
@@ -87,14 +109,14 @@ class CategoriesController {
                 'categories': categories,
                 'items': items,
                 'attribute': attribute,
-                'genres': genres,
+                'genres': attribute_values,
             });
         });
     }
     search(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const genre = yield prisma.genres.findMany({
+            const attribute_values = yield prisma.attribute_values.findMany({
                 where: {
                     id: Number(id)
                 },
@@ -111,8 +133,8 @@ class CategoriesController {
                 },
             });
             let arr = [];
-            for (let i = 0; i < genre[0].Items.length; i++) {
-                arr.push(genre[0].Items[i].relItem.id);
+            for (let i = 0; i < attribute_values[0].Items.length; i++) {
+                arr.push(attribute_values[0].Items[i].relItem.id);
             }
             for (let i = 0; i < arr.length; i++) {
             }
@@ -130,15 +152,39 @@ class CategoriesController {
                     },
                 }
             });
-            const genres = yield prisma.genres.findMany({});
+            const genres = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    name: true,
+                                    id: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr1 = [];
+            for (let i = 0; i < genres[0].attribute_values.length; i++) {
+                // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+                arr1.push({
+                    name: genres[0].attribute_values[i].relAttribute_value.name,
+                    id: genres[0].attribute_values[i].relAttribute_value.id
+                });
+            }
             const categories = yield prisma.categories.findMany({});
             const attribute = yield prisma.attribute.findMany({});
             res.render('search', {
                 'categories': categories,
                 'items': items,
-                'genre': genre,
+                'genre': attribute_values,
                 'attribute': attribute,
-                'genres': genres,
+                'genres': arr1,
                 auth: req.session.auth,
                 active: req.session.active,
                 status: req.session.status,
@@ -147,87 +193,6 @@ class CategoriesController {
                 category: req.session.category,
                 count: req.session.count,
             });
-        });
-    }
-    cartoons(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const { name } = req.params;
-            const genres = yield prisma.cartoonGenres.findMany({
-                where: {
-                    name
-                }
-            });
-            const count = yield prisma.items.count({
-                where: {
-                    genre: {
-                        contains: name
-                    },
-                    type: Number(req.session.category)
-                }
-            });
-            if (count > 0) {
-                let n = Math.ceil(count / 4);
-                req.session.count = Math.ceil(count / 4);
-                let itemsPerPage = 4;
-                let page = Number(req.query.page);
-                if (!page)
-                    page = 1;
-                if (page > n)
-                    page = n;
-                let pages = itemsPerPage * (page - 1);
-                const items = yield prisma.items.findMany({
-                    skip: pages,
-                    take: itemsPerPage,
-                    where: {
-                        genre: {
-                            contains: name
-                        },
-                        type: Number(req.session.category)
-                    }
-                });
-                let k = 0;
-                for (let i = 0; i < items.length; i++) {
-                    k = k + 1;
-                }
-                const categories = yield prisma.categories.findMany({});
-                const attribute = yield prisma.attribute.findMany({});
-                res.render('types/movies', {
-                    auth: req.session.auth,
-                    status: req.session.status,
-                    admin: req.session.admin,
-                    active: req.session.active,
-                    count: req.session.count,
-                    category: req.session.category,
-                    'items': items,
-                    'attribute': attribute,
-                    'cartoonGenres': genres,
-                    'categories': categories,
-                });
-            }
-            else {
-                const items = yield prisma.items.findMany({
-                    where: {
-                        genre: {
-                            contains: name
-                        },
-                        type: Number(req.session.category)
-                    }
-                });
-                const categories = yield prisma.categories.findMany({});
-                const attribute = yield prisma.attribute.findMany({});
-                res.render('types/movies', {
-                    auth: req.session.auth,
-                    status: req.session.status,
-                    admin: req.session.admin,
-                    active: req.session.active,
-                    count: req.session.count,
-                    category: req.session.category,
-                    'items': items,
-                    'cartoonGenres': genres,
-                    'attribute': attribute,
-                    'categories': categories,
-                });
-            }
         });
     }
     searchFilms(req, res) {
@@ -248,9 +213,33 @@ class CategoriesController {
                 req.session.searchMove = false;
             }
             const categories = yield prisma.categories.findMany({});
-            const genres = yield prisma.genres.findMany({});
+            const attribute = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    name: true,
+                                    id: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr = [];
+            for (let i = 0; i < attribute[0].attribute_values.length; i++) {
+                // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+                arr.push({
+                    name: attribute[0].attribute_values[i].relAttribute_value.name,
+                    id: attribute[0].attribute_values[i].relAttribute_value.id
+                });
+            }
             res.render('search', {
-                'genres': genres,
+                'genres': arr,
                 'categories': categories,
                 'items': items,
                 searchMove: req.session.searchMove,
@@ -522,8 +511,31 @@ class CategoriesController {
             });
             const categories = yield prisma.categories.findMany({});
             const attributeBar = yield prisma.attribute.findMany({});
-            const genres = yield prisma.genres.findMany({});
-            const cartoonGenres = yield prisma.cartoonGenres.findMany({});
+            const attribute = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    name: true,
+                                    id: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr1 = [];
+            for (let i = 0; i < attribute[0].attribute_values.length; i++) {
+                // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+                arr1.push({
+                    name: attribute[0].attribute_values[i].relAttribute_value.name,
+                    id: attribute[0].attribute_values[i].relAttribute_value.id
+                });
+            }
             const items = yield prisma.items.findMany();
             res.render(`types/${attributeRoute[0].tag}`, {
                 'attributes': attributes,
@@ -531,8 +543,7 @@ class CategoriesController {
                 'items': items,
                 'attribute_values': attribute_values,
                 'attribute': attributeBar,
-                'cartoonGenres': cartoonGenres,
-                'genres': genres,
+                'genres': arr1,
                 auth: req.session.auth,
                 filter: req.session.filter,
                 status: req.session.status,

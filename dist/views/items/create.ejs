@@ -22,7 +22,8 @@
 
                 <% for (let i=0; i < categories.length; i++) { %>
                     <div class="create__radio__items">
-                        <input type="radio" class="block float-left left-20 relative " name="check__radio" value="<%= categories[i].id %>">
+                        <input type="radio" class="block float-left left-20 relative " name="check__radio"
+                            value="<%= categories[i].id %>">
                         <label class="radio__items">
                             <%= categories[i].name %>
                         </label>
@@ -58,7 +59,9 @@
                 <input class="w-80 mt-1 h-14" name="screenwriter" placeholder="сценарист" required>
                 <input class="w-80 mt-1 h-14" name="operator" placeholder="оператор" required>
             </div>
-            <button class="relative w-80 left-48 bg-gray-600 text-white inline-block shadow-2xl shadow-gray-700/80 p-3 top-44  hover:shadow-xl hover:-translate-y-1 hover:bg-gray-500 duration-700" value="опубликовать" onclick="createItem()">опубликовать</button>
+            <button
+                class="relative w-80 left-48 bg-gray-600 text-white inline-block shadow-2xl shadow-gray-700/80 p-3 top-44  hover:shadow-xl hover:-translate-y-1 hover:bg-gray-500 duration-700"
+                value="опубликовать" onclick="createItem()">опубликовать</button>
         </form>
 
         <script>
@@ -68,7 +71,10 @@
                 let formData = new FormData(form);
 
                 await fetch(form.action, {
-                    'method': 'POST', 
+                    'method': 'POST',
+                    'headers': {
+                        'Content-Type': 'application/json',
+                    },
                     'body': formData
                 });
             }

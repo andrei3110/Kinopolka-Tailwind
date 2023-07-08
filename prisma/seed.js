@@ -14,126 +14,6 @@ async function category() {
    
 }
 
-async function genres() {
-    const createGenre = await prisma.genres.createMany({
-        data: [
-            { 
-                name: "боевик" ,
-               
-            },
-            {
-                name: "комедии",
-         
-            },
-            { 
-                name: "романтика",
-               
-            },
-            { 
-                name: "драма",
-              
-            },
-            { 
-                name: "мелодрама",
-             
-            },
-            {
-                name: "триллер",
-               
-            },
-            {
-                name: "исторический",
-               
-            },
-            {  
-                name: "трагедия",
-             
-            },
-            {
-                name: "фантастика",
-             
-                },
-            { 
-                name: "приключения",
-            
-            },
-            { 
-                name: "семейный",
-               
-            },
-            { 
-                name: "детский",
-           
-            },
-            {
-                 name: "детектив",
-          
-            },
-            { 
-                name: "мистика",
-            
-            },
-            {
-                 name: "криминал",
-             
-            },    
-        ],
-        skipDuplicates: true
-        }
-    );
-}
-
-async function cartoonGenres() {
-    const createGenre = await prisma.cartoonGenres.createMany({
-        data: [
-            { 
-                name: "боевик",
-            
-            },
-            { 
-                name: "романтика",
-               
-            },
-            { 
-                name: "исторический",
-              
-            },
-            { 
-                name: "фантастика",
-             
-            },
-            {
-                 name: "приключения",
-            
-            },
-            { 
-                name: "семейный",
-           
-            },
-            {
-                 name: "детектив",
-            },
-            {
-                 name: "мистика",
-             
-            },
-            {
-                 name: "военный мультфильм",
-           
-            },  
-            {
-                 name: "развлекательный",
-        
-            },   
-            {
-                 name: "учебный",
-             
-            },   
-        ],
-        skipDuplicates: true
-        }
-    );
-}
 
 async function users() {
     const users = await prisma.users.createMany({
@@ -509,11 +389,9 @@ async function attribute_attribute_values() {
     );
 }
 attribute_values()
-attribute_attribute_values() 
 attribute()
+attribute_attribute_values() 
 category()
-genres()
-cartoonGenres()
 users()
 
 

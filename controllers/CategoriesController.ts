@@ -14,9 +14,32 @@ export class CategoriesController {
                 type: Number(id),
             }
         });
-        const attribute = await prisma.attribute.findMany({})
-        const genres = await prisma.genres.findMany({})
-        const cartoons = await prisma.cartoonGenres.findMany({})
+        const attributes = await prisma.attribute.findMany({})
+        const attribute = await prisma.attribute.findMany({
+            where: {
+                id: 1
+            },
+            select: {
+                attribute_values: {
+                    select: {
+                        relAttribute_value: {
+                            select: {
+                                name: true,
+                                id:   true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        let arr =[]
+        for(let i = 0; i < attribute[0].attribute_values.length;i ++){
+            // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+            arr.push({
+                name:attribute[0].attribute_values[i].relAttribute_value.name,
+                 id:attribute[0].attribute_values[i].relAttribute_value.id
+                })
+        }
         req.session.category = Number(id);
         res.render('types/index', {
             auth: req.session.auth,
@@ -25,18 +48,17 @@ export class CategoriesController {
             status: req.session.status,
             category: req.session.category,
             count: req.session.count,
-            'attribute':attribute,
+            'attribute':attributes,
             'items': items,
             'categories': categories,
-            'genres': genres,
-            'cartoonGenres': cartoons
+            'genres': arr,
         });
     }
 
     async movies(req: Request, res: Response) {
         const { id } = req.params;
         
-        const genres = await prisma.genres.findMany({
+        const attribute_values = await prisma.attribute_values.findMany({
             where: {
                 id: Number(id)
             },
@@ -56,9 +78,9 @@ export class CategoriesController {
         })
 
         let arr = []
-        for (let i = 0; i < genres[0].Items.length; i++) {
+        for (let i = 0; i < attribute_values[0].Items.length; i++) {
 
-            arr.push(genres[0].Items[i].relItem.id)
+            arr.push(attribute_values[0].Items[i].relItem.id)
 
 
         }
@@ -88,7 +110,7 @@ export class CategoriesController {
             'categories': categories,
             'items': items,
             'attribute':attribute,
-            'genres': genres,
+            'genres': attribute_values,
         })
 
     }
@@ -96,7 +118,7 @@ export class CategoriesController {
     async search(req: Request, res: Response) {
         const { id } = req.params;
 
-        const genre = await prisma.genres.findMany({
+        const attribute_values = await prisma.attribute_values.findMany({
 
             where: {
                 id: Number(id)
@@ -117,9 +139,9 @@ export class CategoriesController {
         })
 
         let arr = []
-        for (let i = 0; i < genre[0].Items.length; i++) {
+        for (let i = 0; i < attribute_values[0].Items.length; i++) {
 
-            arr.push(genre[0].Items[i].relItem.id)
+            arr.push(attribute_values[0].Items[i].relItem.id)
 
         }
         for (let i = 0; i < arr.length; i++) {
@@ -138,15 +160,39 @@ export class CategoriesController {
                 },
             }
         })
-        const genres = await prisma.genres.findMany({})
+        const genres = await prisma.attribute.findMany({
+            where: {
+                id: 1
+            },
+            select: {
+                attribute_values: {
+                    select: {
+                        relAttribute_value: {
+                            select: {
+                                name: true,
+                                id:   true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        let arr1 =[]
+        for(let i = 0; i < genres[0].attribute_values.length;i ++){
+            // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+            arr1.push({
+                name:genres[0].attribute_values[i].relAttribute_value.name,
+                 id:genres[0].attribute_values[i].relAttribute_value.id
+                })
+        }
         const categories = await prisma.categories.findMany({});
         const attribute = await prisma.attribute.findMany({})
         res.render('search', {
             'categories': categories,
             'items': items,
-            'genre': genre,
+            'genre': attribute_values,
             'attribute':attribute,
-            'genres':genres,
+            'genres':arr1,
             auth: req.session.auth,
             active: req.session.active,
             status: req.session.status,
@@ -158,95 +204,7 @@ export class CategoriesController {
 
     }
 
-    async cartoons(req: Request, res: Response) {
-        const { name } = req.params;
-
-        const genres = await prisma.cartoonGenres.findMany({
-            where: {
-                name
-            }
-        });
-
-        const count = await prisma.items.count({
-            where: {
-                genre: {
-                    contains: name
-                },
-                type: Number(req.session.category)
-            }
-        });
-        if (count > 0) {
-            let n = Math.ceil(count / 4)
-            req.session.count = Math.ceil(count / 4)
-            let itemsPerPage = 4
-
-            let page = Number(req.query.page)
-            if (!page) page = 1;
-            if (page > n) page = n;
-            let pages = itemsPerPage * (page - 1)
-
-
-            const items = await prisma.items.findMany({
-                skip: pages,
-                take: itemsPerPage,
-                where: {
-                    genre: {
-                        contains: name
-                    },
-                    type: Number(req.session.category)
-
-                }
-
-            });
-
-            let k = 0;
-            
-            for (let i = 0; i < items.length; i++) {
-                k = k + 1
-            }
-            const categories = await prisma.categories.findMany({})
-            const attribute = await prisma.attribute.findMany({})
-            res.render('types/movies', {
-                auth: req.session.auth,
-                status: req.session.status,
-                admin: req.session.admin,
-                active: req.session.active,
-                count: req.session.count,
-                category: req.session.category,
-                'items': items,
-                'attribute':attribute,
-                'cartoonGenres': genres,
-                'categories': categories,
-            });
-        } else {
-            const items = await prisma.items.findMany({
-                where: {
-                    genre: {
-                        contains: name
-                    },
-                    type: Number(req.session.category)
-
-                }
-
-            });
-            const categories = await prisma.categories.findMany({})
-            const attribute = await prisma.attribute.findMany({})
-            res.render('types/movies', {
-                auth: req.session.auth,
-                status: req.session.status,
-                admin: req.session.admin,
-                active: req.session.active,
-                count: req.session.count,
-                category: req.session.category,
-                'items': items,
-                'cartoonGenres': genres,
-                'attribute':attribute,
-                'categories': categories,
-            });
-        }
-
-    }
-
+    
     async searchFilms(req: Request, res: Response) {
 
         const { name } = req.body;
@@ -265,9 +223,33 @@ export class CategoriesController {
         }
 
         const categories = await prisma.categories.findMany({})
-        const genres = await prisma.genres.findMany({})
+        const attribute = await prisma.attribute.findMany({
+            where: {
+                id: 1
+            },
+            select: {
+                attribute_values: {
+                    select: {
+                        relAttribute_value: {
+                            select: {
+                                name: true,
+                                id:   true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        let arr =[]
+        for(let i = 0; i < attribute[0].attribute_values.length;i ++){
+            // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+            arr.push({
+                name:attribute[0].attribute_values[i].relAttribute_value.name,
+                 id:attribute[0].attribute_values[i].relAttribute_value.id
+                })
+        }
         res.render('search', {
-            'genres': genres,
+            'genres': arr,
             'categories': categories,
             'items': items,
             searchMove: req.session.searchMove,
@@ -570,8 +552,32 @@ export class CategoriesController {
         })
         const categories = await prisma.categories.findMany({})
         const attributeBar = await prisma.attribute.findMany({})
-        const genres = await prisma.genres.findMany({})
-        const cartoonGenres = await prisma.cartoonGenres.findMany({})
+        const attribute = await prisma.attribute.findMany({
+            where: {
+                id: 1
+            },
+            select: {
+                attribute_values: {
+                    select: {
+                        relAttribute_value: {
+                            select: {
+                                name: true,
+                                id:   true
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        let arr1 =[]
+        for(let i = 0; i < attribute[0].attribute_values.length;i ++){
+            // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+            arr1.push({
+                name:attribute[0].attribute_values[i].relAttribute_value.name,
+                 id:attribute[0].attribute_values[i].relAttribute_value.id
+                })
+        }
+   
         const items = await prisma.items.findMany()
 
             res.render(`types/${attributeRoute[0].tag}`, {
@@ -580,8 +586,7 @@ export class CategoriesController {
                 'items':items,
                 'attribute_values':attribute_values,
                 'attribute':attributeBar,
-                'cartoonGenres':cartoonGenres,
-                'genres': genres,
+                'genres': arr1,
                 auth: req.session.auth,
                 filter: req.session.filter,
                 status: req.session.status,

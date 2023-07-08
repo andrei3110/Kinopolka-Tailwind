@@ -34,7 +34,28 @@ class ItemsController {
                     status: 'подписка'
                 }
             });
-            const genres = yield prisma.genres.findMany({});
+            const attribute = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    id: true,
+                                    name: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr = [];
+            for (let i = 0; i < attribute[0].attribute_values.length; i++) {
+                arr.push({ name: attribute[0].attribute_values[i].relAttribute_value.name,
+                    id: attribute[0].attribute_values[i].relAttribute_value.id });
+            }
             const categories = yield prisma.categories.findMany({});
             const users = yield prisma.users.findMany({
                 where: {
@@ -45,7 +66,7 @@ class ItemsController {
             }
             res.render('home', {
                 'categories': categories,
-                'genres': genres,
+                'genres': arr,
                 'items': items,
                 'users': users,
                 auth: req.session.auth,
@@ -114,12 +135,33 @@ class ItemsController {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const { id, name, image, description, producer, actor, screenwriter, operator, regicer, year, age, country, status, video, treller } = req.body;
-            let genres = yield prisma.genres.findMany({});
+            const attributes1 = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    id: true,
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr1 = [];
+            for (let i = 0; i < attributes1[0].attribute_values.length; i++) {
+                arr1.push(attributes1[0].attribute_values[i].relAttribute_value.id);
+                console.log(attributes1[0].attribute_values[i]);
+            }
             let mass = [];
             let all = "";
-            let one = "";
-            for (let i = 0; i < genres.length; i++) {
+            let one;
+            for (let i = 0; i < attributes1[0].attribute_values.length; i++) {
                 one = req.body.check;
+                console.log(one);
             }
             let arr = [];
             for (let i = 0; i < one.length; i++) {
@@ -156,10 +198,10 @@ class ItemsController {
                         id: Number(one[i])
                     }
                 });
-                yield prisma.items__genres.create({
+                yield prisma.items__attribute_values.create({
                     data: {
                         itemId: items.id,
-                        genreId: attribute_values[0].id
+                        attribute_valuesId: attribute_values[0].id
                     }
                 });
             }
@@ -520,10 +562,34 @@ class ItemsController {
                 req.session.searchMove = false;
             }
             const categories = yield prisma.categories.findMany({});
-            const genres = yield prisma.genres.findMany({});
+            const attribute = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    name: true,
+                                    id: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr = [];
+            for (let i = 0; i < attribute[0].attribute_values.length; i++) {
+                // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+                arr.push({
+                    name: attribute[0].attribute_values[i].relAttribute_value.name,
+                    id: attribute[0].attribute_values[i].relAttribute_value.id
+                });
+            }
             res.render('search', {
                 'categories': categories,
-                'genres': genres,
+                'genres': arr,
                 'items': items,
                 searchMove: req.session.searchMove,
                 auth: req.session.auth,
@@ -542,15 +608,33 @@ class ItemsController {
                     id: Number(id)
                 }
             });
-            const genres = yield prisma.genres.findMany({});
-            // await prisma.items__genres.delete({
-            //     // items_genres: {
-            //     //     itemId: items.id,
-            //     //     genreId: genres[0].id
-            //     // }
-            // })
+            const attribute = yield prisma.attribute.findMany({
+                where: {
+                    id: 1
+                },
+                select: {
+                    attribute_values: {
+                        select: {
+                            relAttribute_value: {
+                                select: {
+                                    name: true,
+                                    id: true
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            let arr = [];
+            for (let i = 0; i < attribute[0].attribute_values.length; i++) {
+                // console.log(attribute[0].attribute_values[i].relAttribute_value.name)
+                arr.push({
+                    name: attribute[0].attribute_values[i].relAttribute_value.name,
+                    id: attribute[0].attribute_values[i].relAttribute_value.id
+                });
+            }
             if (items != null) {
-                yield prisma.items__genres.deleteMany({
+                yield prisma.items__attribute_values.deleteMany({
                     where: {
                         itemId: Number(items.id)
                     }
@@ -594,14 +678,20 @@ class ItemsController {
         return __awaiter(this, void 0, void 0, function* () {
             const { cartoonGenre, genre } = req.body;
             const categories = yield prisma.categories.findMany({});
-            yield prisma.genres.create({
+            yield prisma.attribute_values.create({
                 data: {
                     name: genre
                 }
             });
-            yield prisma.cartoonGenres.create({
+            const attribute_values = yield prisma.attribute_values.findMany({
+                where: {
+                    name: genre
+                }
+            });
+            const attribute_attribute_values = yield prisma.attribute_attribute_values.create({
                 data: {
-                    name: cartoonGenre
+                    attributeId: 1,
+                    attribute_valueId: attribute_values[0].id
                 }
             });
             res.redirect('/');
