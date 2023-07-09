@@ -134,7 +134,7 @@ class ItemsController {
     AddItems(req, res) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const { id, name, image, description, producer, actor, screenwriter, operator, regicer, year, age, country, status, video, treller } = req.body;
+            const { id, name, image, check, description, producer, actor, screenwriter, operator, regicer, year, age, country, status, video, treller } = req.body;
             const attributes1 = yield prisma.attribute.findMany({
                 where: {
                     id: 1
@@ -154,20 +154,29 @@ class ItemsController {
             let arr1 = [];
             for (let i = 0; i < attributes1[0].attribute_values.length; i++) {
                 arr1.push(attributes1[0].attribute_values[i].relAttribute_value.id);
-                console.log(attributes1[0].attribute_values[i]);
             }
             let mass = [];
-            let all = "";
-            let one;
-            for (let i = 0; i < attributes1[0].attribute_values.length; i++) {
-                one = req.body.check;
-                console.log(one);
+            let all = [];
+            let one = [];
+            all.push(req.body.check);
+            for (let s = 0; s < all[0].length; s++) {
+                const names = yield prisma.attribute_values.findMany({
+                    where: {
+                        name: String(all[0][s])
+                    }
+                });
+                one.push(names[0].id);
+            }
+            for (let i = 0; i < one.length; i++) {
+                console.log(one[i]);
             }
             let arr = [];
             for (let i = 0; i < one.length; i++) {
                 let attribute_values = yield prisma.attribute_values.findMany({
                     where: {
-                        id: Number(one[i])
+                        id: {
+                            in: Number(one[i])
+                        }
                     }
                 });
                 arr.push(attribute_values[0].name);
@@ -195,7 +204,7 @@ class ItemsController {
             for (let i = 0; i < one.length; i++) {
                 let attribute_values = yield prisma.attribute_values.findMany({
                     where: {
-                        id: Number(one[i])
+                        id: one[i]
                     }
                 });
                 yield prisma.items__attribute_values.create({

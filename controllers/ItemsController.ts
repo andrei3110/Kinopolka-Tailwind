@@ -127,7 +127,7 @@ export class ItemsController {
     }
 
     async AddItems(req: Request, res: Response) {
-        const { id, name, image, description, producer, actor, screenwriter, operator, regicer, year, age, country, status, video, treller } = req.body;
+        const { id, name, image,check, description, producer, actor, screenwriter, operator, regicer, year, age, country, status, video, treller } = req.body;
 
          const attributes1 = await prisma.attribute.findMany({
             where:{
@@ -148,14 +148,31 @@ export class ItemsController {
        let arr1 = []
         for(let i=0; i < attributes1[0].attribute_values.length; i ++){
             arr1.push(attributes1[0].attribute_values[i].relAttribute_value.id)
-            console.log(attributes1[0].attribute_values[i])
+          
         }
         let mass = []
-        let all = "";
-        let one;
-        for (let i = 0; i < attributes1[0].attribute_values.length; i++) {
-            one = req.body.check
-            console.log(one)
+        let all = [];
+        let one = [];
+
+  
+            all.push(req.body.check)
+            for(let s = 0; s < all[0].length; s++){
+               
+                const names = await prisma.attribute_values.findMany({
+                    where:{
+                        name:String(all[0][s])
+                    }
+                })
+                one.push(names[0].id)
+                
+            }           
+           
+            
+       
+
+        for (let i = 0; i < one.length; i++) {
+            
+            console.log(one[i])
         }
 
         let arr = [];
@@ -163,7 +180,9 @@ export class ItemsController {
         for (let i = 0; i < one.length; i++) {
             let attribute_values = await prisma.attribute_values.findMany({
                 where: {
-                    id: Number(one[i])
+                    id: {
+                        in: Number(one[i])
+                    }
                 }
             })
             arr.push(attribute_values[0].name)
@@ -196,7 +215,7 @@ export class ItemsController {
            
             let attribute_values = await prisma.attribute_values.findMany({
                 where: {
-                    id: Number(one[i])
+                    id: one[i]
                 }
             })
             await prisma.items__attribute_values.create({
